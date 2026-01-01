@@ -1,0 +1,104 @@
+// =============================================================================
+// Prisma Schema for Dalat SmartRoute AI
+// Database: SQLite (for simplicity, no server setup needed)
+// =============================================================================
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// =============================================================================
+// User Model
+// =============================================================================
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  username     String     @unique
+  passwordHash String
+  avatar       String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  reviews      Review[]
+  favorites    Favorite[]
+}
+
+// =============================================================================
+// Category Model
+// =============================================================================
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  nameVi String
+  places Place[]
+}
+
+// =============================================================================
+// Place Model
+// =============================================================================
+
+model Place {
+  id            Int        @id @default(autoincrement())
+  title         String
+  titleVi       String?
+  location      String
+  locationVi    String?
+  description   String
+  descriptionVi String?
+  imagePath     String     // Local path: /images/place-name.jpg
+  rating        Float      @default(0)
+  reviewCount   Int        @default(0)
+  categoryId    Int
+  category      Category   @relation(fields: [categoryId], references: [id])
+  openingHours  String?
+  phone         String?
+  latitude      Float?
+  longitude     Float?
+  indoorSuitable Boolean  @default(false) // For weather-based recommendations
+  designerTip   String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  reviews       Review[]
+  favorites     Favorite[]
+}
+
+// =============================================================================
+// Review Model
+// =============================================================================
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  title     String?
+  content   String
+  rating    Int      // 1-5 stars
+  language  String   @default("en")
+  helpful   Int      @default(0)
+  tags      String   @default("[]") // JSON array stored as string (SQLite limitation)
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  placeId   Int
+  place     Place    @relation(fields: [placeId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =============================================================================
+// Favorite Model (User's saved places)
+// =============================================================================
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  placeId   Int
+  place     Place    @relation(fields: [placeId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, placeId])
+}
