@@ -21,7 +21,21 @@
             "image": "https://ongvove.com/uploads/0000/79/2023/07/22/langbiang-1.jpg",
             "address": "Lạc Dương District",
             "phone": null,
-            "price_range": "Start your hike at dawn to catch the mesmerizing sea of clouds. Bring layers as temperatures drop significantly at the peak."
+            "price_range": "Start your hike at dawn to catch the mesmerizing sea of clouds. Bring layers as temperatures drop significantly at the peak.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 61,
+                    "title": "Amazing mountain experience!",
+                    "content": "The view from Langbiang Mountain is absolutely breathtaking. I recommend going early in the morning to catch the sunrise.",
+                    "rating": 5,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.880Z"
+                }
+            ]
         },
         {
             "id": 2,
@@ -41,7 +55,21 @@
             "image": "https://samtenhills.vn/wp-content/uploads/2025/07/ho-tuyen-lam-1.jpg",
             "address": "Trại Mát Ward",
             "phone": null,
-            "price_range": "Rent a kayak in the early afternoon when the light is softest. The small islands in the middle of the lake offer secluded spots for a peaceful picnic."
+            "price_range": "Rent a kayak in the early afternoon when the light is softest. The small islands in the middle of the lake offer secluded spots for a peaceful picnic.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 62,
+                    "title": "Peaceful lake escape",
+                    "content": "Tuyen Lam Lake is so serene. We rented kayaks and spent the whole afternoon exploring. Highly recommend!",
+                    "rating": 5,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.881Z"
+                }
+            ]
         },
         {
             "id": 3,
@@ -64,7 +92,21 @@
             "image": "https://dulichcaonguyen.com/wp-content/uploads/2025/05/Thung-lung-tinh-yeu-Da-Lat-1_23022024102445.jpg",
             "address": "Phường 8, Dalat",
             "phone": null,
-            "price_range": "Visit early morning to avoid crowds. The lake at the heart of the valley is especially beautiful with morning mist."
+            "price_range": "Visit early morning to avoid crowds. The lake at the heart of the valley is especially beautiful with morning mist.",
+            "rating": 4,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 68,
+                    "title": "Perfect viewpoint",
+                    "content": "Valley of Love offers amazing photo opportunities. Go early to avoid crowds.",
+                    "rating": 4,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.883Z"
+                }
+            ]
         },
         {
             "id": 4,
@@ -87,7 +129,21 @@
             "image": "https://cdn.prod.rexby.com/image/06819f7110a5489abb415cc636e56342",
             "address": "Prenn Pass",
             "phone": null,
-            "price_range": "Take the alpine coaster for an unforgettable experience. Visit during or right after the rainy season for the most impressive water flow."
+            "price_range": "Take the alpine coaster for an unforgettable experience. Visit during or right after the rainy season for the most impressive water flow.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 64,
+                    "title": "Thác nước tuyệt đẹp",
+                    "content": "Datanla thật sự đẹp! Trượt xe xuống thác rất thú vị. Nhớ mang áo mưa!",
+                    "rating": 5,
+                    "language": "vi",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.882Z"
+                }
+            ]
         },
         {
             "id": 5,
@@ -110,7 +166,10 @@
             "image": "https://hitour.vn/storage/images/upload/tour-tham-quan-thac-voi-ngoai-thanh-da-lat-1-ngay-750.webp",
             "address": "Nam Ban, Lâm Hà",
             "phone": null,
-            "price_range": "Wear sturdy shoes for the slippery trail down. The best photos are taken from the viewing platform on the left side."
+            "price_range": "Wear sturdy shoes for the slippery trail down. The best photos are taken from the viewing platform on the left side.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 6,
@@ -133,7 +192,10 @@
             "image": "https://dulichviet.com.vn/images/bandidau/thac-pongour-dia-diem-du-lich-da-lat-ma-du-khach-khong-nen-bo-lo.jpg",
             "address": "Đức Trọng District",
             "phone": null,
-            "price_range": "Visit between July-November for the most spectacular water volume. Pack a picnic for the scenic grounds."
+            "price_range": "Visit between July-November for the most spectacular water volume. Pack a picnic for the scenic grounds.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 7,
@@ -153,7 +215,10 @@
             "image": "https://samtenhills.vn/wp-content/uploads/2025/07/ho-xuan-huong-da-lat.jpg",
             "address": "City Center",
             "phone": null,
-            "price_range": "Rent a swan boat at sunset for the most romantic experience. The small cafes along the shore offer perfect spots for people watching."
+            "price_range": "Rent a swan boat at sunset for the most romantic experience. The small cafes along the shore offer perfect spots for people watching.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 8,
@@ -176,7 +241,10 @@
             "image": "https://zoomtravel.vn/upload/images/thung-lung-vang-1-min.jpg",
             "address": "Phường 7, Dalat",
             "phone": null,
-            "price_range": "Try fresh strawberries from the farms. The zip-line here offers stunning views of the valley."
+            "price_range": "Try fresh strawberries from the farms. The zip-line here offers stunning views of the valley.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 9,
@@ -200,7 +268,21 @@
             "image": "https://sakos.vn/wp-content/uploads/2023/05/cham-vao-lang-man-quan-ca-phe-dep-lung-linh-cho-cap-doi-tai-da-lat-2.jpg",
             "address": "Phường 4, Dalat",
             "phone": null,
-            "price_range": "Ask for the house special weasel coffee. Sit in the garden area during late afternoon for the best lighting."
+            "price_range": "Ask for the house special weasel coffee. Sit in the garden area during late afternoon for the best lighting.",
+            "rating": 4,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 63,
+                    "title": "Best coffee in Dalat",
+                    "content": "The weasel coffee here is incredible. The garden atmosphere is unique and relaxing.",
+                    "rating": 4,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.881Z"
+                }
+            ]
         },
         {
             "id": 10,
@@ -224,7 +306,10 @@
             "image": "https://dalattrongtoi.com/media/upload/images/h%E1%BB%93/55.jpg",
             "address": "Tà Nung",
             "phone": null,
-            "price_range": "Arrive before 7 AM to catch the sunrise over the valley. Try their signature egg coffee with a valley view."
+            "price_range": "Arrive before 7 AM to catch the sunrise over the valley. Try their signature egg coffee with a valley view.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 11,
@@ -248,7 +333,10 @@
             "image": "https://mia.vn/media/uploads/blog-du-lich/an-coffee-chon-binh-yen-xanh-tham-cho-nhung-tam-hon-mong-manh-1635285247.jpg",
             "address": "Nguyễn Chí Thanh, Phường 1",
             "phone": "+84 909 888 999",
-            "price_range": "Best visited late at night when the city is quiet. Their hot chocolate is perfect for cold Da Lat nights."
+            "price_range": "Best visited late at night when the city is quiet. Their hot chocolate is perfect for cold Da Lat nights.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 12,
@@ -272,7 +360,10 @@
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/99/40/5f/windmills-cafe.jpg?w=700&h=400&s=1",
             "address": "94 Nguyễn Đình Chiểu",
             "phone": null,
-            "price_range": "Come early morning to avoid crowds. The lower terrace has the best views of the windmill."
+            "price_range": "Come early morning to avoid crowds. The lower terrace has the best views of the windmill.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 13,
@@ -296,7 +387,21 @@
             "image": "https://crazyhouse.vn/uploads/anh/94615392-153463912820988-79798108652830720-o.jpg",
             "address": "Huỳnh Thúc Kháng Street",
             "phone": null,
-            "price_range": "Book a room overnight for the full experience. The giraffe room has the most unique bed in Vietnam."
+            "price_range": "Book a room overnight for the full experience. The giraffe room has the most unique bed in Vietnam.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 69,
+                    "title": "Architectural wonder",
+                    "content": "Crazy House is unlike anything I have ever seen. Great for photography!",
+                    "rating": 5,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.884Z"
+                }
+            ]
         },
         {
             "id": 14,
@@ -317,7 +422,10 @@
             "image": "https://www.dalatpalacehotel.com/wp-content/uploads/elementor/thumbs/3-3-r9uh9nghwss3m4lsyuzd45tvd0szqca3kqprtxx5ws.jpg",
             "address": "Trần Phú Street",
             "phone": "+84 263 3825 444",
-            "price_range": "Even if not staying, visit the golf course or Le Rabelais restaurant for authentic French cuisine."
+            "price_range": "Even if not staying, visit the golf course or Le Rabelais restaurant for authentic French cuisine.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 15,
@@ -341,7 +449,10 @@
             "image": "https://ik.imagekit.io/tvlk/blog/2024/09/ga-da-lat-1-1024x682.webp?tr=q-70,c-at_max,w-1000,h-600",
             "address": "Quang Trung Street",
             "phone": null,
-            "price_range": "Take the 5km train ride to Trại Mát for beautiful countryside views. Trains run every 2 hours."
+            "price_range": "Take the 5km train ride to Trại Mát for beautiful countryside views. Trains run every 2 hours.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 16,
@@ -365,7 +476,10 @@
             "image": "https://upload.wikimedia.org/wikipedia/commons/5/50/Nha_tho_Domaine_de_Marie_-_Huy_Phuong_1.jpg",
             "address": "Ngô Quyền Street",
             "phone": null,
-            "price_range": "Visit during golden hour for stunning photography. The nuns sell handmade fruit preserves at the entrance."
+            "price_range": "Visit during golden hour for stunning photography. The nuns sell handmade fruit preserves at the entrance.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 17,
@@ -389,7 +503,21 @@
             "image": "https://dulichkhampha24.com/wp-content/uploads/2022/11/banh-can-da-lat-2.png",
             "address": "Phan Đình Phùng Street",
             "phone": null,
-            "price_range": "Come before 8 AM to avoid long queues. Order extra quail eggs for the authentic experience."
+            "price_range": "Come before 8 AM to avoid long queues. Order extra quail eggs for the authentic experience.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 66,
+                    "title": "Must try Bánh Căn!",
+                    "content": "This is the best Bánh Căn I have ever had. Authentic taste, friendly owner, and very affordable!",
+                    "rating": 5,
+                    "language": "en",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.882Z"
+                }
+            ]
         },
         {
             "id": 18,
@@ -413,7 +541,21 @@
             "image": "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lw9avx7lpzob97",
             "address": "Near Dalat Market",
             "phone": null,
-            "price_range": "Try the mixed avocado-durian ice cream for a unique flavor combination only locals know about."
+            "price_range": "Try the mixed avocado-durian ice cream for a unique flavor combination only locals know about.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 67,
+                    "title": "Kem bơ ngon tuyệt!",
+                    "content": "Kem bơ ở đây quá ngon, vị béo ngậy mà không ngấy. Nhất định phải thử!",
+                    "rating": 5,
+                    "language": "vi",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.883Z"
+                }
+            ]
         },
         {
             "id": 19,
@@ -437,7 +579,10 @@
             "image": "https://img.360dalat.com/resize/730x-/2020/10/07/ba-hung-nem-nuong-1aa3.jpg",
             "address": "Hai Bà Trưng Street",
             "phone": null,
-            "price_range": "Ask for extra dipping sauce - their house-made sauce is the secret to the dish."
+            "price_range": "Ask for extra dipping sauce - their house-made sauce is the secret to the dish.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 20,
@@ -461,7 +606,10 @@
             "image": "https://i.ytimg.com/vi/CSI9ildGX9s/maxresdefault.jpg",
             "address": "Nguyễn Văn Trỗi",
             "phone": null,
-            "price_range": "Add extra lemon grass and chili for the authentic Huế flavor. Pairs well with bánh mì on the side."
+            "price_range": "Add extra lemon grass and chili for the authentic Huế flavor. Pairs well with bánh mì on the side.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 21,
@@ -485,7 +633,21 @@
             "image": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/lau_gan_bo_14_c8c91b7fc0.jpg",
             "address": "Nguyễn Văn Trỗi, Phường 2",
             "phone": "+84 263 3825 555",
-            "price_range": "Order the beef set with all cuts for the full experience. Their mushroom plate is also exceptional."
+            "price_range": "Order the beef set with all cuts for the full experience. Their mushroom plate is also exceptional.",
+            "rating": 5,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 70,
+                    "title": "Lẩu bò đỉnh cao",
+                    "content": "Nước dùng thơm đậm đà, thịt bò tươi ngon. Quán đông nên nhớ đến sớm!",
+                    "rating": 5,
+                    "language": "vi",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.885Z"
+                }
+            ]
         },
         {
             "id": 22,
@@ -509,7 +671,10 @@
             "image": "https://du-lich-da-lat.com//wp-content/uploads/2021/01/nha-hang-memory-tai-da-lat-1024x576.jpg",
             "address": "Trần Hưng Đạo Street",
             "phone": "+84 263 3511 888",
-            "price_range": "Reserve a table on the terrace for the best views. Their grilled salmon is outstanding."
+            "price_range": "Reserve a table on the terrace for the best views. Their grilled salmon is outstanding.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 23,
@@ -533,7 +698,10 @@
             "image": "https://ganesh.vn/wp-content/uploads/2020/05/nha-hang-am-thuc-ganesh-1.jpg",
             "address": "Trường Công Định, Phường 3",
             "phone": "+84 263 3520 999",
-            "price_range": "Try the butter chicken with garlic naan. Their mango lassi is perfect for cooler Dalat weather."
+            "price_range": "Try the butter chicken with garlic naan. Their mango lassi is perfect for cooler Dalat weather.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 24,
@@ -557,7 +725,10 @@
             "image": "https://i-giadinh.vnecdn.net/2021/01/15/pho1-1610692656-2291-1610693117.jpg",
             "address": "Lâm Viên Square",
             "phone": null,
-            "price_range": "Add extra quẩy (fried dough sticks) for the authentic experience. Their chili sauce is house-made."
+            "price_range": "Add extra quẩy (fried dough sticks) for the authentic experience. Their chili sauce is house-made.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 25,
@@ -581,7 +752,10 @@
             "image": "https://static.vinwonders.com/production/banh-trang-nuong-da-lat-1.jpg",
             "address": "Night Market Area",
             "phone": null,
-            "price_range": "Watch the cook grill it over charcoal for entertainment. Add extra cheese for a modern twist."
+            "price_range": "Watch the cook grill it over charcoal for entertainment. Add extra cheese for a modern twist.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 26,
@@ -605,7 +779,10 @@
             "image": "https://gofood.vn//upload/r/xoi-ga-mo-hanh.jpg",
             "address": "Dalat Central Market",
             "phone": null,
-            "price_range": "Ask for extra fried shallots on top. Their chili sauce is legendary among locals."
+            "price_range": "Ask for extra fried shallots on top. Their chili sauce is legendary among locals.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 27,
@@ -629,7 +806,21 @@
             "image": "https://statics.vinpearl.com/cho-dem-da-lat-2_1687963722.jpg",
             "address": "Nguyen Thi Minh Khai Street",
             "phone": null,
-            "price_range": "Start from the north end and work your way down. The fruit stalls have the best local strawberries."
+            "price_range": "Start from the north end and work your way down. The fruit stalls have the best local strawberries.",
+            "rating": 4,
+            "reviewCount": 1,
+            "reviews": [
+                {
+                    "id": 65,
+                    "title": "Chợ đêm vui quá",
+                    "content": "Đồ ăn ngon, giá cả phải chăng. Nên đến vào ngày thường để tránh đông.",
+                    "rating": 4,
+                    "language": "vi",
+                    "helpful": 0,
+                    "username": "Traveler",
+                    "createdAt": "2026-01-01T14:37:46.882Z"
+                }
+            ]
         },
         {
             "id": 28,
@@ -650,7 +841,10 @@
             "image": "https://vcdn1-dulich.vnecdn.net/2021/01/07/bill-balo-maianhdao-dalat-2-1609925658-1610029777.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=1s_bUnjam8Dp2V0p0aKVqg",
             "address": "Phường 3, Dalat",
             "phone": null,
-            "price_range": "Best visited in late January to early February during cherry blossom season. Early morning offers the best photographs without crowds."
+            "price_range": "Best visited in late January to early February during cherry blossom season. Early morning offers the best photographs without crowds.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 29,
@@ -673,7 +867,10 @@
             "image": "https://letsflytravel.vn/wp-content/uploads/2025/04/so-thu-zoodoo-da-lat-2-740x490.webp",
             "address": "Xuân Thọ",
             "phone": "+84 263 3789 456",
-            "price_range": "Buy carrots at the entrance to feed the alpacas. The petting area is best visited in early morning when animals are most active."
+            "price_range": "Buy carrots at the entrance to feed the alpacas. The petting area is best visited in early morning when animals are most active.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 30,
@@ -696,7 +893,10 @@
             "image": "https://media.vietravel.com/images/Content/doi-che-cau-dat-o-da-lat-2.png",
             "address": "Xuân Trường",
             "phone": "+84 263 3678 123",
-            "price_range": "Join the 2PM tour for the most comprehensive experience. Buy their Oolong tea as a souvenir."
+            "price_range": "Join the 2PM tour for the most comprehensive experience. Buy their Oolong tea as a souvenir.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 31,
@@ -720,7 +920,10 @@
             "image": "https://statics.vinpearl.com/thien-vien-truc-lam-da-lat-2_1690967479.jpg",
             "address": "Near Tuyen Lam Lake",
             "phone": null,
-            "price_range": "Take the cable car for stunning views. Visit during morning prayer for an authentic spiritual experience."
+            "price_range": "Take the cable car for stunning views. Visit during morning prayer for an authentic spiritual experience.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 32,
@@ -744,7 +947,10 @@
             "image": "https://statics.vinpearl.com/vuon-hoa-thanh-pho-da-lat-5_1689838404.jpg",
             "address": "Near Xuan Huong Lake",
             "phone": "+84 263 3822 178",
-            "price_range": "Visit December-January for the Flower Festival. The orchid greenhouse has the most exotic species."
+            "price_range": "Visit December-January for the Flower Festival. The orchid greenhouse has the most exotic species.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 33,
@@ -768,7 +974,10 @@
             "image": "https://cdn3.ivivu.com/2022/10/ch%C3%B9a-linh-ph%C6%B0%E1%BB%9Bc-ivivu-1.jpg",
             "address": "Trại Mát",
             "phone": null,
-            "price_range": "Take the antique train from Dalat Railway Station for a unique arrival. The bell tower offers great photos."
+            "price_range": "Take the antique train from Dalat Railway Station for a unique arrival. The bell tower offers great photos.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 34,
@@ -791,7 +1000,10 @@
             "image": "https://amthucdalat.vn/wp-content/uploads/2024/06/dinh-nui-langbiang-noc-nha-vung-tay-nguyen-3.jpg",
             "address": "Lạc Dương District",
             "phone": null,
-            "price_range": "Start at 5 AM to reach the peak for sunrise. Bring at least 2 liters of water and wear hiking boots."
+            "price_range": "Start at 5 AM to reach the peak for sunrise. Bring at least 2 liters of water and wear hiking boots.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         },
         {
             "id": 35,
@@ -815,7 +1027,10 @@
             "image": "https://cdn2.tuoitre.vn/thumb_w/1200/471584752817336320/2024/6/3/image012-16983680094131998465729-17174042616911311510796-16-0-398-730-crop-17174051360551442515636.jpg",
             "address": "Phường 4",
             "phone": "+84 263 3567 890",
-            "price_range": "Join a guided tour to understand the stories behind each sculpture. Photography is allowed but no flash."
+            "price_range": "Join a guided tour to understand the stories behind each sculpture. Photography is allowed but no flash.",
+            "rating": 4.5,
+            "reviewCount": 0,
+            "reviews": []
         }
     ]
 }

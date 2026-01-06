@@ -12,14 +12,25 @@ async function restoreData() {
     console.log('🔄 Starting data export from Prisma database...');
 
     try {
-        // Fetch all places with their categories
+        // Fetch all places with their categories and reviews
         const places = await prisma.place.findMany({
             include: {
-                category: true
+                category: true,
+                reviews: {
+                    include: {
+                        user: {
+                            select: { id: true, username: true }
+                        }
+                    }
+                }
             }
         });
 
         console.log(`📦 Found ${places.length} places in database`);
+
+        // Count total reviews
+        const totalReviews = places.reduce((sum, p) => sum + p.reviews.length, 0);
+        console.log(`📝 Found ${totalReviews} reviews in database`);
 
         // Transform to data.json format
         const locations = places.map((place, index) => ({
@@ -38,7 +49,20 @@ async function restoreData() {
             image: place.imagePath,
             address: place.location,
             phone: place.phone,
-            price_range: place.designerTip?.replace('Price: ', '') || null
+            price_range: place.designerTip?.replace('Price: ', '') || null,
+            rating: place.rating,
+            reviewCount: place.reviewCount,
+            // Include reviews array
+            reviews: place.reviews.map(review => ({
+                id: review.id,
+                title: review.title,
+                content: review.content,
+                rating: review.rating,
+                language: review.language,
+                helpful: review.helpful,
+                username: review.user?.username || 'Anonymous',
+                createdAt: review.createdAt
+            }))
         }));
 
         // Write to data.json
