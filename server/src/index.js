@@ -52,18 +52,15 @@ app.get('/api/health', (req, res) => {
 });
 
 // =============================================================================
-// Force Seed Route (MULTI-LANGUAGE VERSION)
+// Force Seed Route (SIMPLIFIED - EN/VI ONLY)
 // =============================================================================
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import translations
-import { placeTranslations } from './translations.js';
-
 app.get('/force-seed', async (req, res) => {
   try {
-    console.log('🌍 MULTI-LANGUAGE FORCE SEED - ALL 35 PLACES WITH KO/FR/ZH 🌍');
+    console.log('🚀 FORCE SEED - RESTORING ALL PLACES (EN/VI) 🚀');
 
     // 1. Clear all data
     await prisma.favorite.deleteMany({});
@@ -93,25 +90,16 @@ app.get('/force-seed', async (req, res) => {
 
     let count = 0;
 
-    // 5. Insert each place with MULTI-LANGUAGE translations
+    // 5. Insert each place with EN/VI only
     for (const item of locations) {
       try {
-        // Get translations from lookup table
-        const trans = placeTranslations[item.name] || placeTranslations['default'];
-
-        // TITLE mappings
+        // TITLE mappings (EN + VI only)
         const title = item.name || item.title || `Place ${item.id}`;
-        const titleVi = item.name_vi || item.name || title;
-        const titleKo = trans?.ko?.title || title;  // Korean
-        const titleFr = trans?.fr?.title || title;  // French
-        const titleZh = trans?.zh?.title || title;  // Chinese
+        const titleVi = item.name_vi || title;
 
-        // DESCRIPTION mappings
+        // DESCRIPTION mappings (EN + VI only)
         const description = item.description || '';
         const descriptionVi = item.description_vi || description;
-        const descriptionKo = trans?.ko?.description || description;  // Korean
-        const descriptionFr = trans?.fr?.description || description;  // French
-        const descriptionZh = trans?.zh?.description || description;  // Chinese
 
         // COORDS
         const latitude = item.lat != null ? parseFloat(item.lat) : 0;
@@ -131,25 +119,13 @@ app.get('/force-seed', async (req, res) => {
           categoryId = catNature.id;
         }
 
-        // Create place with ALL language fields
+        // Create place with EN/VI fields only
         const place = await prisma.place.create({
           data: {
-            // English (default)
             title,
-            description,
-            // Vietnamese
             titleVi,
+            description,
             descriptionVi,
-            // Korean (NEW)
-            titleKo,
-            descriptionKo,
-            // French (NEW)
-            titleFr,
-            descriptionFr,
-            // Chinese (NEW)
-            titleZh,
-            descriptionZh,
-            // Other fields
             location: item.address || 'Đà Lạt',
             locationVi: item.address || 'Đà Lạt',
             imagePath: item.image || '',
@@ -183,19 +159,15 @@ app.get('/force-seed', async (req, res) => {
         }
 
         count++;
-        if (count <= 5) console.log(`✓ [${count}] ${title} | KO: ${titleKo} | FR: ${titleFr}`);
+        if (count <= 5) console.log(`✓ [${count}] ${title}`);
 
       } catch (err) {
         console.error(`❌ ${item.name}: ${err.message}`);
       }
     }
 
-    console.log(`🎉 SUCCESS: ${count} places with EN/VI/KO/FR/ZH translations.`);
-    res.json({
-      success: true,
-      message: `All ${count} places restored with 5 languages (EN/VI/KO/FR/ZH).`,
-      languages: ['en', 'vi', 'ko', 'fr', 'zh']
-    });
+    console.log(`🎉 SUCCESS: ${count} places restored (EN/VI).`);
+    res.json({ success: true, message: `All ${count} places restored with EN/VI.` });
 
   } catch (err) {
     console.error('🔥 SEED ERROR:', err);

@@ -32,19 +32,8 @@ const DetailPage = () => {
     const [isSaved, setIsSaved] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
 
-    const lang = i18n.language;
-
-    // Get localized field based on current language
-    const getLocalizedField = (baseField, data) => {
-        const fieldMap = {
-            'vi': `${baseField}Vi`,
-            'ko': `${baseField}Ko`,
-            'fr': `${baseField}Fr`,
-            'zh': `${baseField}Zh`
-        };
-        const localizedKey = fieldMap[lang];
-        return (localizedKey && data[localizedKey]) || data[baseField] || '';
-    };
+    // SIMPLIFIED: Only VI has translated place names, all others use English
+    const isVietnamese = i18n.language === 'vi';
 
     // Fetch place data from API
     useEffect(() => {
@@ -129,10 +118,10 @@ const DetailPage = () => {
         );
     }
 
-    // Get localized content
-    const title = getLocalizedField('title', place);
-    const description = getLocalizedField('description', place);
-    const location = getLocalizedField('location', place);
+    // Get localized content (VI uses translated fields, all others use English)
+    const title = (isVietnamese && place.titleVi) ? place.titleVi : place.title;
+    const description = (isVietnamese && place.descriptionVi) ? place.descriptionVi : place.description;
+    const location = (isVietnamese && place.locationVi) ? place.locationVi : place.location;
 
     return (
         <div className="min-h-screen bg-background pb-24">

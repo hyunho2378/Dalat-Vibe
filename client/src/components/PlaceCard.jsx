@@ -11,23 +11,10 @@ const PlaceCard = ({ place }) => {
     // Safety check - prevent crash if place is null/undefined
     if (!place) return null;
 
-    const lang = i18n.language;
-
-    // Get localized field based on current language
-    const getLocalizedField = (baseField, place) => {
-        const fieldMap = {
-            'vi': `${baseField}Vi`,
-            'ko': `${baseField}Ko`,
-            'fr': `${baseField}Fr`,
-            'zh': `${baseField}Zh`
-        };
-        const localizedKey = fieldMap[lang];
-        return (localizedKey && place[localizedKey]) || place[baseField] || '';
-    };
-
-    // Get translated title and location
-    const title = getLocalizedField('title', place);
-    const location = getLocalizedField('location', place);
+    // SIMPLIFIED: Only VI has translated place names, all others use English
+    const isVietnamese = i18n.language === 'vi';
+    const title = (isVietnamese && place.titleVi) ? place.titleVi : place.title;
+    const location = (isVietnamese && place.locationVi) ? place.locationVi : place.location;
 
     return (
         <Link
