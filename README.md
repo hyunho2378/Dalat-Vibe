@@ -46,4 +46,4 @@ npm run dev
 ```
 
 # Test raining Weather
-http://localhost:3001/api/places/weather-recommendations?weatherId=500&limit=6
+https://dalat-vibe.onrender.com/api/places/weather-recommendations?weatherId=500&limit=6

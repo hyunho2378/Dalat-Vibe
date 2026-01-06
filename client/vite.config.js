@@ -9,7 +9,7 @@ export default defineConfig({
         proxy: {
             // Proxy all /api requests to the backend server
             '/api': {
-                target: 'http://localhost:3001',
+                target: 'https://dalat-vibe.onrender.com',
                 changeOrigin: true,
                 secure: false
             }

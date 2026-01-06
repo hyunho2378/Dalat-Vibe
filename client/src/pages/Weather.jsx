@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 
 // API requests are proxied through backend to protect API keys
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
 
 // =============================================================================
 // Helper Functions
