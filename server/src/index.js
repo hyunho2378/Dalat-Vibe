@@ -61,7 +61,7 @@ const __dirname = path.dirname(__filename);
 
 app.get('/force-seed', async (req, res) => {
   try {
-    console.log('🚨 FORCE SEED INITIATED WITH STRICT MAPPING 🚨');
+    console.log('🚨 FORCE SEED WITH CATEGORY MAPPING 🚨');
 
     // 1. Clear existing data
     await prisma.favorite.deleteMany({});
@@ -81,11 +81,27 @@ app.get('/force-seed', async (req, res) => {
     });
     console.log('✓ Created demo user');
 
-    // 3. Create default category
-    const defaultCategory = await prisma.category.create({
-      data: { name: 'General', nameVi: 'Điểm đến' }
-    });
-    console.log('✓ Created category');
+    // 3. Create ALL categories (for LocalEats page to work)
+    const categories = [
+      { name: 'Restaurant', nameVi: 'Nhà hàng' },
+      { name: 'Street Food', nameVi: 'Ẩm thực đường phố' },
+      { name: 'Café', nameVi: 'Quán cà phê' },
+      { name: 'Nature', nameVi: 'Thiên nhiên' },
+      { name: 'Lake', nameVi: 'Hồ' },
+      { name: 'Waterfall', nameVi: 'Thác nước' },
+      { name: 'Indoor', nameVi: 'Trong nhà' },
+      { name: 'Outdoor', nameVi: 'Ngoài trời' },
+      { name: 'Park', nameVi: 'Công viên' },
+      { name: 'Adventure', nameVi: 'Phiêu lưu' },
+      { name: 'General', nameVi: 'Điểm đến' }
+    ];
+
+    const categoryMap = {};
+    for (const cat of categories) {
+      const created = await prisma.category.create({ data: cat });
+      categoryMap[cat.name.toLowerCase()] = created.id;
+    }
+    console.log(`✓ Created ${categories.length} categories`);
 
     // 4. Read JSON File
     const dataPath = path.join(__dirname, '../data.json');
@@ -96,29 +112,56 @@ app.get('/force-seed', async (req, res) => {
     console.log(`📦 Found ${locations.length} locations`);
 
     let successCount = 0;
+    let reviewCount = 0;
 
-    // 5. Insert Loop with FORCED MAPPING
+    // 5. Insert Loop with AGGRESSIVE MAPPING
     for (const item of locations) {
       try {
-        // --- FIX: NAME MAPPING ---
-        const title = item.name || "Untitled Place";
-        const titleVi = item.name_vi || item.nameVi || item.name || title;
+        // ========== TITLE MAPPING ==========
+        const title = item.name || item.title || `Place ${item.id}`;
+        const titleVi = item.name_vi || item.nameVi || item.titleVi || title;
 
-        // --- FIX: TIP MAPPING (Critical) ---
-        // The JSON has the tip text in 'price_range'. Map it to 'designerTip'.
+        // ========== COORDINATES (Critical for Maps) ==========
+        const latitude = item.lat != null ? parseFloat(item.lat) : null;
+        const longitude = item.lng != null ? parseFloat(item.lng) : null;
+
+        // ========== IMAGES ==========
+        const imagePath = item.image || item.imagePath || '';
+
+        // ========== LOCATION/ADDRESS ==========
+        const location = item.address || item.location || 'Đà Lạt';
+        const locationVi = item.address || item.location || 'Đà Lạt, Việt Nam';
+
+        // ========== DESIGNER TIP (from price_range) ==========
         const designerTip = item.price_range || item.designerTip || null;
 
-        // --- FIX: ADDRESS & COORDS ---
-        const location = item.address || "Dalat, Vietnam";
-        const locationVi = item.address || "Đà Lạt, Việt Nam";
-        const latitude = item.lat !== undefined ? parseFloat(item.lat) : null;
-        const longitude = item.lng !== undefined ? parseFloat(item.lng) : null;
+        // ========== CATEGORY MAPPING (Critical for LocalEats) ==========
+        const itemType = (item.type || '').toLowerCase();
+        let categoryId = categoryMap['general']; // default
 
-        // --- FIX: IMAGES ---
-        const imagePath = item.image || "";
+        // Map type to category
+        if (itemType.includes('restaurant') || itemType.includes('dining') || itemType.includes('local')) {
+          categoryId = categoryMap['restaurant'];
+        } else if (itemType.includes('street') || itemType.includes('food')) {
+          categoryId = categoryMap['street food'];
+        } else if (itemType.includes('café') || itemType.includes('cafe') || itemType.includes('coffee')) {
+          categoryId = categoryMap['café'];
+        } else if (itemType.includes('nature') || itemType.includes('scenic')) {
+          categoryId = categoryMap['nature'];
+        } else if (itemType.includes('lake')) {
+          categoryId = categoryMap['lake'];
+        } else if (itemType.includes('waterfall')) {
+          categoryId = categoryMap['waterfall'];
+        } else if (itemType.includes('indoor')) {
+          categoryId = categoryMap['indoor'];
+        } else if (itemType.includes('outdoor') || itemType.includes('park')) {
+          categoryId = categoryMap['outdoor'];
+        } else if (itemType.includes('adventure')) {
+          categoryId = categoryMap['adventure'];
+        }
 
-        // --- FIX: OPENING HOURS ---
-        let openingHours = "9:00 AM - 6:00 PM";
+        // ========== OPENING HOURS ==========
+        let openingHours = null;
         if (item.opening_hours) {
           if (typeof item.opening_hours === 'string') {
             openingHours = item.opening_hours;
@@ -127,16 +170,15 @@ app.get('/force-seed', async (req, res) => {
           }
         }
 
-        // --- OTHERS ---
-        const description = item.description || "";
-        const descriptionVi = item.description_vi || item.description || "";
+        // ========== OTHER FIELDS ==========
+        const description = item.description || '';
+        const descriptionVi = item.description_vi || item.descriptionVi || description;
         const rating = parseFloat(item.rating) || 4.5;
-        const reviewCount = item.reviews ? item.reviews.length : 0;
-        const indoorSuitable = (item.type || '').toLowerCase().includes('indoor');
+        const indoorSuitable = itemType.includes('indoor') || itemType.includes('café') || itemType.includes('restaurant');
 
-        // Log for debugging
+        // Log first 3 for debugging
         if (successCount < 3) {
-          console.log(`📝 [${successCount + 1}] "${title}" | lat=${latitude} | tip="${designerTip?.substring(0, 30)}..."`);
+          console.log(`📝 [${successCount + 1}] "${title}" | type="${item.type}" | lat=${latitude}, lng=${longitude}`);
         }
 
         // Create place
@@ -150,8 +192,8 @@ app.get('/force-seed', async (req, res) => {
             descriptionVi,
             imagePath,
             rating,
-            reviewCount,
-            categoryId: defaultCategory.id,
+            reviewCount: item.reviews?.length || 0,
+            categoryId,
             openingHours,
             latitude,
             longitude,
@@ -160,13 +202,13 @@ app.get('/force-seed', async (req, res) => {
           }
         });
 
-        // --- REVIEWS ---
+        // Create reviews
         if (item.reviews && Array.isArray(item.reviews)) {
           for (const r of item.reviews) {
             await prisma.review.create({
               data: {
                 title: null,
-                content: r.text || r.content || "Great place!",
+                content: r.text || r.content || 'Great place!',
                 rating: r.rating || 5,
                 language: 'en',
                 helpful: 0,
@@ -175,6 +217,7 @@ app.get('/force-seed', async (req, res) => {
                 placeId: place.id
               }
             });
+            reviewCount++;
           }
         }
 
@@ -184,8 +227,13 @@ app.get('/force-seed', async (req, res) => {
       }
     }
 
-    console.log(`✅ SUCCESS: Seeded ${successCount} places with correct names and tips.`);
-    res.json({ success: true, count: successCount });
+    console.log(`✅ SUCCESS: ${successCount} places, ${reviewCount} reviews`);
+    res.json({
+      success: true,
+      places: successCount,
+      reviews: reviewCount,
+      categories: categories.length
+    });
 
   } catch (error) {
     console.error('🔥 SEED ERROR:', error);
