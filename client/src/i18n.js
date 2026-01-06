@@ -19,19 +19,38 @@ const resources = {
             },
             // Authentication
             auth: {
+                // Buttons
                 login: 'Login',
                 logout: 'Logout',
-                profile: 'My Profile',
-                register: 'Register',
+                signUp: 'Sign Up',
+                signIn: 'Sign In',
+                register: 'Create Account',
+                submit: 'Submit',
+                // Labels
                 email: 'Email',
                 password: 'Password',
                 username: 'Username',
                 confirmPassword: 'Confirm Password',
+                profile: 'My Profile',
+                // Placeholders
+                emailPlaceholder: 'Enter your email',
+                passwordPlaceholder: 'Enter your password',
+                usernamePlaceholder: 'Choose a username',
+                confirmPasswordPlaceholder: 'Confirm your password',
+                // Links & Text
                 forgotPassword: 'Forgot password?',
                 noAccount: "Don't have an account?",
                 hasAccount: 'Already have an account?',
-                signUp: 'Sign Up',
-                signIn: 'Sign In'
+                orContinueWith: 'Or continue with',
+                termsAgree: 'By signing up, you agree to our Terms',
+                // Validation Errors
+                invalidEmail: 'Please enter a valid email',
+                invalidPassword: 'Password must be at least 6 characters',
+                passwordMismatch: 'Passwords do not match',
+                requiredField: 'This field is required',
+                loginFailed: 'Login failed. Please check your credentials.',
+                registerSuccess: 'Account created successfully!',
+                welcomeBack: 'Welcome back!'
             },
             // Language
             language: {
@@ -50,14 +69,14 @@ const resources = {
             // Sections
             sections: {
                 aiPicks: 'AI Picks',
-                forecastCuration: "Forecast-Based Curation: Today's Perfect Match",
-                viewAllRecs: 'View All Recommendations',
+                forecastCuration: "Forecast-Based Curation:\nToday's Perfect Match",
+                viewAllRecs: 'See More',
                 localFavorites: 'Local Favorites',
                 localGemsTitle: 'The Dalat Palate: Hidden Local Gems',
-                discoverLocalEats: 'Discover Local Eats',
+                discoverLocalEats: 'See More',
                 location: 'Location',
                 exploreCity: 'Explore Dalat City',
-                mapDescription: 'Interactive Map of Key Locations & Attractions'
+                mapDescription: 'Interactive Map'
             },
             // AI Recommendations Page
             aiRecs: {
@@ -198,19 +217,38 @@ const resources = {
             },
             // Authentication
             auth: {
+                // Buttons
                 login: 'Đăng nhập',
                 logout: 'Đăng xuất',
-                profile: 'Hồ sơ của tôi',
-                register: 'Đăng ký',
+                signUp: 'Đăng ký',
+                signIn: 'Đăng nhập',
+                register: 'Tạo tài khoản',
+                submit: 'Gửi',
+                // Labels
                 email: 'Email',
                 password: 'Mật khẩu',
                 username: 'Tên người dùng',
                 confirmPassword: 'Xác nhận mật khẩu',
+                profile: 'Hồ sơ của tôi',
+                // Placeholders
+                emailPlaceholder: 'Nhập email của bạn',
+                passwordPlaceholder: 'Nhập mật khẩu của bạn',
+                usernamePlaceholder: 'Chọn tên người dùng',
+                confirmPasswordPlaceholder: 'Xác nhận mật khẩu của bạn',
+                // Links & Text
                 forgotPassword: 'Quên mật khẩu?',
                 noAccount: 'Chưa có tài khoản?',
                 hasAccount: 'Đã có tài khoản?',
-                signUp: 'Đăng ký',
-                signIn: 'Đăng nhập'
+                orContinueWith: 'Hoặc tiếp tục với',
+                termsAgree: 'Bằng cách đăng ký, bạn đồng ý với Điều khoản',
+                // Validation Errors
+                invalidEmail: 'Vui lòng nhập email hợp lệ',
+                invalidPassword: 'Mật khẩu phải có ít nhất 6 ký tự',
+                passwordMismatch: 'Mật khẩu không khớp',
+                requiredField: 'Trường này là bắt buộc',
+                loginFailed: 'Đăng nhập thất bại. Vui lòng kiểm tra thông tin.',
+                registerSuccess: 'Tạo tài khoản thành công!',
+                welcomeBack: 'Chào mừng trở lại!'
             },
             // Language
             language: {
@@ -229,14 +267,14 @@ const resources = {
             // Sections
             sections: {
                 aiPicks: 'AI Chọn lọc',
-                forecastCuration: 'Gợi ý theo Thời tiết: Điểm đến Hoàn hảo Hôm nay',
-                viewAllRecs: 'Xem tất cả Gợi ý',
+                forecastCuration: 'Gợi ý theo Thời tiết:\nĐiểm đến Hoàn hảo',
+                viewAllRecs: 'Xem thêm',
                 localFavorites: 'Yêu thích Địa phương',
                 localGemsTitle: 'Ẩm thực Đà Lạt: Viên ngọc Ẩn giấu',
-                discoverLocalEats: 'Khám phá Ẩm thực',
+                discoverLocalEats: 'Xem thêm',
                 location: 'Vị trí',
-                exploreCity: 'Khám phá Thành phố Đà Lạt',
-                mapDescription: 'Bản đồ tương tác các Địa điểm & Điểm tham quan'
+                exploreCity: 'Khám phá Đà Lạt',
+                mapDescription: 'Bản đồ tương tác'
             },
             // AI Recommendations Page
             aiRecs: {
@@ -375,21 +413,40 @@ const resources = {
                 intro: '달랏',
                 community: '커뮤니티'
             },
-            // Authentication
+            // Authentication - Professional Korean phrasing
             auth: {
+                // Buttons
                 login: '로그인',
                 logout: '로그아웃',
-                profile: '내 프로필',
-                register: '회원가입',
+                signUp: '회원가입',
+                signIn: '시작하기',
+                register: '계정 만들기',
+                submit: '확인',
+                // Labels
                 email: '이메일',
                 password: '비밀번호',
-                username: '사용자명',
+                username: '닉네임',
                 confirmPassword: '비밀번호 확인',
-                forgotPassword: '비밀번호 찾기',
+                profile: '내 프로필',
+                // Placeholders
+                emailPlaceholder: '이메일을 입력하세요',
+                passwordPlaceholder: '비밀번호를 입력하세요',
+                usernamePlaceholder: '닉네임을 입력하세요',
+                confirmPasswordPlaceholder: '비밀번호를 다시 입력하세요',
+                // Links & Text
+                forgotPassword: '비밀번호를 잊으셨나요?',
                 noAccount: '계정이 없으신가요?',
-                hasAccount: '이미 계정이 있으신가요?',
-                signUp: '가입하기',
-                signIn: '로그인'
+                hasAccount: '이미 회원이신가요?',
+                orContinueWith: '또는 다음으로 계속하기',
+                termsAgree: '가입 시 이용약관에 동의하게 됩니다',
+                // Validation Errors
+                invalidEmail: '올바른 이메일을 입력해주세요',
+                invalidPassword: '비밀번호는 6자 이상이어야 합니다',
+                passwordMismatch: '비밀번호가 일치하지 않습니다',
+                requiredField: '필수 입력 항목입니다',
+                loginFailed: '로그인에 실패했습니다. 정보를 확인해주세요.',
+                registerSuccess: '계정이 생성되었습니다!',
+                welcomeBack: '다시 만나서 반갑습니다!'
             },
             // Language
             language: {
@@ -402,36 +459,36 @@ const resources = {
             },
             // Hero Section
             hero: {
-                title: '안개 속\n고원을 발견하다',
-                subtitle: '달랏: 축복받은 땅의 놀라운 정수.'
+                title: '안개 속\n비밀의 고원',
+                subtitle: '달랏: 영원한 봄의 도시'
             },
             // Sections
             sections: {
                 aiPicks: 'AI 추천',
-                forecastCuration: '날씨 맞춤 큐레이션: 오늘의 완벽 매칭',
-                viewAllRecs: '전체 추천 보기',
-                localFavorites: '현지인 맛집',
-                localGemsTitle: '달랏의 맛: 숨겨진 보석들',
-                discoverLocalEats: '로컬 맛집 발견',
+                forecastCuration: '날씨 맞춤 추천:\n오늘의 완벽 매칭',
+                viewAllRecs: '더보기',
+                localFavorites: '숨은 명소',
+                localGemsTitle: '현지인이 사랑하는 맛집',
+                discoverLocalEats: '더보기',
                 location: '위치',
-                exploreCity: '달랏 시티 탐험',
-                mapDescription: '주요 명소 인터랙티브 지도'
+                exploreCity: '달랏 탐험',
+                mapDescription: '인터랙티브 지도'
             },
             // AI Recommendations Page
             aiRecs: {
-                title: '완벽한 장소',
-                subtitle: '오늘의 날씨',
-                eyebrow: 'AI 맞춤 큐레이션',
-                description: 'AI가 현재 날씨를 분석하여 달랏에서 완벽한 여행지를 추천합니다.',
+                title: '오늘의',
+                subtitle: '완벽 추천',
+                eyebrow: 'AI 큐레이션',
+                description: 'AI가 현재 날씨를 분석하여 최적의 목적지를 추천합니다.',
                 match: '매칭',
                 backToHome: '홈으로'
             },
             // Local Eats Page
             localEats: {
-                eyebrow: '로컬 발견',
-                title: '정통 맛',
-                subtitle: '고원의',
-                description: '현지인들이 실제로 찾는 숨겨진 맛집. 관광객 함정 없이, 대대로 전해온 진정한 달랏 미식 전통.'
+                eyebrow: '현지 맛집',
+                title: '정통의 맛',
+                subtitle: '고원에서',
+                description: '현지인들이 사랑하는 숨은 맛집. 진정한 달랏의 미식을 경험하세요.'
             },
             // Detail Page
             detail: {
@@ -556,19 +613,38 @@ const resources = {
             },
             // Authentication
             auth: {
+                // Buttons
                 login: 'Connexion',
                 logout: 'Déconnexion',
-                profile: 'Mon Profil',
-                register: "S'inscrire",
+                signUp: "S'inscrire",
+                signIn: 'Se connecter',
+                register: 'Créer un compte',
+                submit: 'Soumettre',
+                // Labels
                 email: 'Email',
                 password: 'Mot de passe',
                 username: "Nom d'utilisateur",
-                confirmPassword: 'Confirmer',
+                confirmPassword: 'Confirmer le mot de passe',
+                profile: 'Mon Profil',
+                // Placeholders
+                emailPlaceholder: 'Entrez votre email',
+                passwordPlaceholder: 'Entrez votre mot de passe',
+                usernamePlaceholder: "Choisissez un nom d'utilisateur",
+                confirmPasswordPlaceholder: 'Confirmez votre mot de passe',
+                // Links & Text
                 forgotPassword: 'Mot de passe oublié?',
-                noAccount: 'Pas de compte?',
+                noAccount: 'Pas encore de compte?',
                 hasAccount: 'Déjà inscrit?',
-                signUp: "S'inscrire",
-                signIn: 'Connexion'
+                orContinueWith: 'Ou continuer avec',
+                termsAgree: "En vous inscrivant, vous acceptez nos Conditions",
+                // Validation Errors
+                invalidEmail: 'Veuillez entrer un email valide',
+                invalidPassword: 'Le mot de passe doit contenir au moins 6 caractères',
+                passwordMismatch: 'Les mots de passe ne correspondent pas',
+                requiredField: 'Ce champ est obligatoire',
+                loginFailed: 'Échec de la connexion. Vérifiez vos identifiants.',
+                registerSuccess: 'Compte créé avec succès!',
+                welcomeBack: 'Bienvenue!'
             },
             // Language
             language: {
@@ -735,19 +811,38 @@ const resources = {
             },
             // Authentication
             auth: {
+                // Buttons
                 login: '登录',
                 logout: '退出',
-                profile: '我的资料',
-                register: '注册',
+                signUp: '注册',
+                signIn: '立即登录',
+                register: '创建账号',
+                submit: '提交',
+                // Labels
                 email: '邮箱',
                 password: '密码',
                 username: '用户名',
                 confirmPassword: '确认密码',
+                profile: '我的资料',
+                // Placeholders
+                emailPlaceholder: '请输入您的邮箱',
+                passwordPlaceholder: '请输入您的密码',
+                usernamePlaceholder: '请选择用户名',
+                confirmPasswordPlaceholder: '请再次输入密码',
+                // Links & Text
                 forgotPassword: '忘记密码？',
-                noAccount: '没有账号？',
+                noAccount: '还没有账号？',
                 hasAccount: '已有账号？',
-                signUp: '注册',
-                signIn: '登录'
+                orContinueWith: '或通过以下方式继续',
+                termsAgree: '注册即表示您同意我们的条款',
+                // Validation Errors
+                invalidEmail: '请输入有效的邮箱地址',
+                invalidPassword: '密码至少需要6个字符',
+                passwordMismatch: '两次输入的密码不一致',
+                requiredField: '此字段为必填项',
+                loginFailed: '登录失败，请检查您的信息',
+                registerSuccess: '账号创建成功！',
+                welcomeBack: '欢迎回来！'
             },
             // Language
             language: {

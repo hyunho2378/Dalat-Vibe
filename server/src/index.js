@@ -52,15 +52,18 @@ app.get('/api/health', (req, res) => {
 });
 
 // =============================================================================
-// Force Seed Route (FINAL VERSION)
+// Force Seed Route (MULTI-LANGUAGE VERSION)
 // =============================================================================
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Import translations
+import { placeTranslations } from './translations.js';
+
 app.get('/force-seed', async (req, res) => {
   try {
-    console.log('🚨 FINAL FORCE SEED - RESTORING ALL 35 PLACES 🚨');
+    console.log('🌍 MULTI-LANGUAGE FORCE SEED - ALL 35 PLACES WITH KO/FR/ZH 🌍');
 
     // 1. Clear all data
     await prisma.favorite.deleteMany({});
@@ -75,7 +78,7 @@ app.get('/force-seed', async (req, res) => {
       data: { email: 'demo@dalat.vibe', username: 'Traveler', passwordHash: 'demo' }
     });
 
-    // 3. Create categories - CRITICAL for Dining/LocalEats page filtering
+    // 3. Create categories
     const catRestaurant = await prisma.category.create({ data: { name: 'Restaurant', nameVi: 'Nhà hàng' } });
     const catStreetFood = await prisma.category.create({ data: { name: 'Street Food', nameVi: 'Ẩm thực đường phố' } });
     const catCafe = await prisma.category.create({ data: { name: 'Café', nameVi: 'Quán cà phê' } });
@@ -90,18 +93,31 @@ app.get('/force-seed', async (req, res) => {
 
     let count = 0;
 
-    // 5. Insert each place with STRICT mapping
+    // 5. Insert each place with MULTI-LANGUAGE translations
     for (const item of locations) {
       try {
-        // TITLE: Use item.name (preserves original names)
+        // Get translations from lookup table
+        const trans = placeTranslations[item.name] || placeTranslations['default'];
+
+        // TITLE mappings
         const title = item.name || item.title || `Place ${item.id}`;
         const titleVi = item.name_vi || item.name || title;
+        const titleKo = trans?.ko?.title || title;  // Korean
+        const titleFr = trans?.fr?.title || title;  // French
+        const titleZh = trans?.zh?.title || title;  // Chinese
 
-        // COORDS: parseFloat for map pins
+        // DESCRIPTION mappings
+        const description = item.description || '';
+        const descriptionVi = item.description_vi || description;
+        const descriptionKo = trans?.ko?.description || description;  // Korean
+        const descriptionFr = trans?.fr?.description || description;  // French
+        const descriptionZh = trans?.zh?.description || description;  // Chinese
+
+        // COORDS
         const latitude = item.lat != null ? parseFloat(item.lat) : 0;
         const longitude = item.lng != null ? parseFloat(item.lng) : 0;
 
-        // CATEGORY: Map type to category for Dining page
+        // CATEGORY mapping
         const itemType = (item.type || '').toLowerCase();
         let categoryId = catGeneral.id;
 
@@ -115,15 +131,27 @@ app.get('/force-seed', async (req, res) => {
           categoryId = catNature.id;
         }
 
-        // Create place
+        // Create place with ALL language fields
         const place = await prisma.place.create({
           data: {
+            // English (default)
             title,
+            description,
+            // Vietnamese
             titleVi,
+            descriptionVi,
+            // Korean (NEW)
+            titleKo,
+            descriptionKo,
+            // French (NEW)
+            titleFr,
+            descriptionFr,
+            // Chinese (NEW)
+            titleZh,
+            descriptionZh,
+            // Other fields
             location: item.address || 'Đà Lạt',
             locationVi: item.address || 'Đà Lạt',
-            description: item.description || '',
-            descriptionVi: item.description_vi || item.description || '',
             imagePath: item.image || '',
             rating: parseFloat(item.rating) || 4.5,
             reviewCount: item.reviews?.length || 0,
@@ -155,15 +183,19 @@ app.get('/force-seed', async (req, res) => {
         }
 
         count++;
-        if (count <= 5) console.log(`✓ [${count}] ${title}`);
+        if (count <= 5) console.log(`✓ [${count}] ${title} | KO: ${titleKo} | FR: ${titleFr}`);
 
       } catch (err) {
         console.error(`❌ ${item.name}: ${err.message}`);
       }
     }
 
-    console.log(`🎉 SUCCESS: ${count} places restored with names, maps, and dining tags.`);
-    res.json({ success: true, message: `All ${count} places restored with names, maps, and dining tags.` });
+    console.log(`🎉 SUCCESS: ${count} places with EN/VI/KO/FR/ZH translations.`);
+    res.json({
+      success: true,
+      message: `All ${count} places restored with 5 languages (EN/VI/KO/FR/ZH).`,
+      languages: ['en', 'vi', 'ko', 'fr', 'zh']
+    });
 
   } catch (err) {
     console.error('🔥 SEED ERROR:', err);

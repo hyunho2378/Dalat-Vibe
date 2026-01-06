@@ -45,12 +45,21 @@ model Category {
 
 model Place {
   id            Int        @id @default(autoincrement())
-  title         String
-  titleVi       String?
+  // Core fields
+  title         String     // English title (default)
+  titleVi       String?    // Vietnamese
+  titleKo       String?    // Korean - NEW
+  titleFr       String?    // French - NEW
+  titleZh       String?    // Chinese - NEW
   location      String
   locationVi    String?
-  description   String
-  descriptionVi String?
+  // Descriptions
+  description   String     // English description (default)
+  descriptionVi String?    // Vietnamese
+  descriptionKo String?    // Korean - NEW
+  descriptionFr String?    // French - NEW
+  descriptionZh String?    // Chinese - NEW
+  // Other fields
   imagePath     String     // Local path: /images/place-name.jpg
   rating        Float      @default(0)
   reviewCount   Int        @default(0)

@@ -286,8 +286,8 @@ const Navbar = () => {
                             onClick={() => setMenuOpen(false)}
                             className={({ isActive }) => `
                                 text-lg font-medium py-4 px-4 rounded-xl transition-all
-                                ${isActive 
-                                    ? 'text-white bg-white/10' 
+                                ${isActive
+                                    ? 'text-white bg-white/10'
                                     : 'text-white/70 hover:text-white hover:bg-white/5'}
                             `}
                         >
@@ -301,22 +301,24 @@ const Navbar = () => {
 
                 {/* Mobile Auth & Language */}
                 <div className="space-y-6">
-                    {/* Language Selector */}
-                    <div className="bg-white/5 rounded-2xl p-4">
-                        <p className="text-sm text-white/50 mb-3">Language</p>
-                        <div className="flex flex-wrap gap-2">
+                    {/* Language Selector - Premium Card Design */}
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-5">
+                        <div className="flex items-center gap-2 mb-4">
+                            <Globe className="w-4 h-4 text-white/60" />
+                            <p className="text-sm font-medium text-white/80">{t('language.select')}</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
                             {languages.map(lang => (
                                 <button
                                     key={lang.code}
                                     onClick={() => handleLanguageChange(lang.code)}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-all ${
-                                        i18n.language === lang.code 
-                                            ? 'bg-white text-slate-900 font-semibold' 
-                                            : 'bg-white/10 text-white/80 hover:bg-white/20'
-                                    }`}
+                                    className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm transition-all ${i18n.language === lang.code
+                                            ? 'bg-white text-slate-900 font-semibold shadow-lg'
+                                            : 'bg-white/5 text-white/70 hover:bg-white/10 border border-white/5'
+                                        }`}
                                 >
-                                    <span>{lang.flag}</span>
-                                    <span>{lang.code.toUpperCase()}</span>
+                                    <span className="text-lg">{lang.flag}</span>
+                                    <span>{lang.label}</span>
                                 </button>
                             ))}
                         </div>

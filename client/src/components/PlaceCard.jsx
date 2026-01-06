@@ -7,11 +7,23 @@ const PlaceCard = ({ place }) => {
     const { i18n } = useTranslation();
     const [isLiked, setIsLiked] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
-    const isVietnamese = i18n.language === 'vi';
+    const lang = i18n.language;
+
+    // Get localized field based on current language
+    const getLocalizedField = (baseField, place) => {
+        const fieldMap = {
+            'vi': `${baseField}Vi`,
+            'ko': `${baseField}Ko`,
+            'fr': `${baseField}Fr`,
+            'zh': `${baseField}Zh`
+        };
+        const localizedKey = fieldMap[lang];
+        return (localizedKey && place[localizedKey]) || place[baseField] || '';
+    };
 
     // Get translated title and location
-    const title = isVietnamese && place.titleVi ? place.titleVi : place.title;
-    const location = isVietnamese && place.locationVi ? place.locationVi : place.location;
+    const title = getLocalizedField('title', place);
+    const location = getLocalizedField('location', place);
 
     return (
         <Link

@@ -32,7 +32,19 @@ const DetailPage = () => {
     const [isSaved, setIsSaved] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
 
-    const isVietnamese = i18n.language === 'vi';
+    const lang = i18n.language;
+
+    // Get localized field based on current language
+    const getLocalizedField = (baseField, data) => {
+        const fieldMap = {
+            'vi': `${baseField}Vi`,
+            'ko': `${baseField}Ko`,
+            'fr': `${baseField}Fr`,
+            'zh': `${baseField}Zh`
+        };
+        const localizedKey = fieldMap[lang];
+        return (localizedKey && data[localizedKey]) || data[baseField] || '';
+    };
 
     // Fetch place data from API
     useEffect(() => {
@@ -104,7 +116,7 @@ const DetailPage = () => {
             <div className="min-h-screen bg-background flex items-center justify-center">
                 <div className="text-center">
                     <p className="font-manrope text-gray-600 mb-4">
-                        {isVietnamese ? 'Không tìm thấy địa điểm' : 'Place not found'}
+                        {t('common.error')}
                     </p>
                     <Link
                         to="/"
@@ -118,9 +130,9 @@ const DetailPage = () => {
     }
 
     // Get localized content
-    const title = isVietnamese && place.titleVi ? place.titleVi : place.title;
-    const description = isVietnamese && place.descriptionVi ? place.descriptionVi : place.description;
-    const location = isVietnamese && place.locationVi ? place.locationVi : place.location;
+    const title = getLocalizedField('title', place);
+    const description = getLocalizedField('description', place);
+    const location = getLocalizedField('location', place);
 
     return (
         <div className="min-h-screen bg-background pb-24">
@@ -148,16 +160,17 @@ const DetailPage = () => {
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                {/* Glassmorphism Back Button */}
+                {/* Glassmorphism Back Button - Safe position below status bar */}
                 <Link
                     to="/"
                     className="
-                        absolute top-5 left-5 z-10
+                        absolute top-16 left-5 z-10
                         p-3 rounded-full
                         bg-white/30 backdrop-blur-md
                         hover:bg-white/50 active:scale-95
                         transition-all duration-200
                         shadow-lg
+                        md:top-5
                     "
                     aria-label="Go back to home"
                 >
@@ -406,7 +419,7 @@ const DetailPage = () => {
             {/* ================================================================= */}
             {place.latitude && place.longitude && (
                 <div className="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-                    <div className="max-w-4xl mx-auto">
+                    <div className="max-w-4xl mx-auto pr-16 md:pr-0">
                         <a
                             href={`https://www.google.com/maps/dir/?api=1&destination=${place.latitude},${place.longitude}`}
                             target="_blank"

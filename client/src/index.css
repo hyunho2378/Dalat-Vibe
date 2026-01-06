@@ -90,3 +90,104 @@ img {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* =============================================================================
+   Multi-Language Layout Safety - Prevent text from breaking containers
+   ============================================================================= */
+
+/* Korean Font Families */
+:lang(ko) body,
+:lang(ko) .font-manrope {
+  font-family: 'Noto Sans KR', 'Manrope', sans-serif;
+}
+
+:lang(ko) .font-tenor,
+:lang(ko) h1,
+:lang(ko) h2,
+:lang(ko) h3 {
+  font-family: 'Noto Serif KR', 'Tenor Sans', serif;
+  font-weight: 500;
+}
+
+/* Chinese Font Families */
+:lang(zh) body {
+  font-family: 'Noto Sans SC', 'Manrope', sans-serif;
+}
+
+/* Tighter letter-spacing for longer translations */
+:lang(ko),
+:lang(fr),
+:lang(zh) {
+  letter-spacing: -0.01em;
+}
+
+/* Navigation buttons - prevent text wrapping */
+nav button,
+nav a,
+.nav-item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Card titles - fixed height with ellipsis */
+.card-title,
+.place-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em;
+  max-height: 3em;
+}
+
+/* Card descriptions - 3 lines max */
+.card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Text truncation utilities */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Fixed-size containers for consistent layout */
+.fixed-height-card {
+  min-height: 320px;
+  max-height: 380px;
+}
+
+/* Button text - prevent expansion */
+button span,
+.btn-text {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Language-specific font size adjustments for longer text */
+:lang(fr) .hero-title,
+:lang(ko) .hero-title {
+  font-size: 0.95em;
+}
+
+/* Footer sections - consistent spacing */
+footer section,
+footer div {
+  min-height: auto;
+}
+
+/* Ensure all flex items don't expand beyond bounds */
+.flex-item-safe {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
