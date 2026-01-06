@@ -63,7 +63,7 @@ app.get('/force-seed', async (req, res) => {
   try {
     console.log('🌱 Starting force seed...');
 
-    // Read data.json reliably
+    // 1. Read data.json
     const dataPath = path.join(__dirname, '../data.json');
     if (!fs.existsSync(dataPath)) {
       return res.status(404).json({ error: 'data.json not found at: ' + dataPath });
@@ -78,7 +78,11 @@ app.get('/force-seed', async (req, res) => {
 
     console.log(`📦 Found ${locations.length} locations in data.json`);
 
-    // Clear existing data (in correct order due to foreign keys)
+    // 2. DEBUG: Log the first item's keys
+    const firstItem = locations[0];
+    console.log('🔍 DEBUG - Keys:', Object.keys(firstItem));
+
+    // 3. Clear existing data
     await prisma.favorite.deleteMany();
     await prisma.review.deleteMany();
     await prisma.place.deleteMany();
@@ -86,7 +90,7 @@ app.get('/force-seed', async (req, res) => {
     await prisma.user.deleteMany();
     console.log('✓ Cleared existing data');
 
-    // Create demo user for reviews
+    // 4. Create demo user
     const demoUser = await prisma.user.create({
       data: {
         email: 'demo@dalat.vibe',
@@ -97,95 +101,119 @@ app.get('/force-seed', async (req, res) => {
     });
     console.log('✓ Created demo user');
 
-    // Create categories from unique types in data.json
-    const typeMap = {
-      'indoor': { name: 'Indoor', nameVi: 'Trong nhà' },
-      'outdoor': { name: 'Outdoor', nameVi: 'Ngoài trời' },
-      'waterfall': { name: 'Waterfall', nameVi: 'Thác nước' },
-      'cafe': { name: 'Café', nameVi: 'Quán cà phê' },
-      'restaurant': { name: 'Restaurant', nameVi: 'Nhà hàng' },
-      'viewpoint': { name: 'Scenic', nameVi: 'Phong cảnh' },
-      'garden': { name: 'Garden', nameVi: 'Vườn hoa' },
-      'adventure': { name: 'Adventure', nameVi: 'Phiêu lưu' },
-      'Indoor': { name: 'Indoor', nameVi: 'Trong nhà' }
-    };
+    // 5. Create category
+    const defaultCategory = await prisma.category.create({
+      data: { name: 'General', nameVi: 'Điểm đến' }
+    });
+    console.log('✓ Created category');
 
-    // Create all categories
-    const createdCategories = [];
-    for (const [type, catData] of Object.entries(typeMap)) {
-      // Check if category already exists
-      const existing = createdCategories.find(c => c.name === catData.name);
-      if (!existing) {
-        const cat = await prisma.category.create({ data: catData });
-        createdCategories.push(cat);
-      }
-    }
-    console.log(`✓ Created ${createdCategories.length} categories`);
-
-    // Build category ID map
-    const categoryIdMap = {};
-    for (const cat of createdCategories) {
-      for (const [type, catData] of Object.entries(typeMap)) {
-        if (catData.name === cat.name) {
-          categoryIdMap[type] = cat.id;
-        }
-      }
-    }
-
-    // Insert places with proper field mapping
+    // 6. Insert places with COMPLETE field mapping
     let insertedCount = 0;
     let reviewCount = 0;
     const errors = [];
 
-    for (const loc of locations) {
+    for (const item of locations) {
       try {
-        // Get category ID (default to 'outdoor' if type not found)
-        const locType = (loc.type || 'outdoor').toLowerCase();
-        const categoryId = categoryIdMap[locType] || categoryIdMap['outdoor'] || createdCategories[0]?.id;
+        // ========== TITLE MAPPING ==========
+        // Try: name -> title (data.json format)
+        // Or:  title -> title (seed.js format)
+        const title = item.name || item.title || `Dalat Place #${item.id}`;
+        const titleVi = item.name_vi || item.nameVi || item.titleVi || title;
 
-        // Parse opening_hours - handle both object and string formats
-        let openingHoursStr = null;
-        if (loc.opening_hours) {
-          if (typeof loc.opening_hours === 'string') {
-            openingHoursStr = loc.opening_hours;
-          } else if (loc.opening_hours.text) {
-            openingHoursStr = loc.opening_hours.text;
-          } else if (loc.opening_hours.start && loc.opening_hours.end) {
-            openingHoursStr = `${loc.opening_hours.start} - ${loc.opening_hours.end}`;
-          }
+        // ========== IMAGE MAPPING ==========
+        // Try: image -> imagePath (data.json format)
+        // Or:  imagePath -> imagePath (seed.js format)
+        const imagePath = item.image || item.imagePath || 'https://via.placeholder.com/400x300';
+
+        // ========== LOCATION/ADDRESS MAPPING ==========
+        // Try: address -> location (data.json format)
+        // Or:  location -> location (seed.js format)
+        const location = item.address || item.location || 'Đà Lạt';
+        const locationVi = item.address || item.locationVi || item.location || 'Đà Lạt';
+
+        // ========== DESCRIPTION MAPPING ==========
+        const description = item.description || '';
+        const descriptionVi = item.description_vi || item.descriptionVi || description;
+
+        // ========== COORDINATES MAPPING ==========
+        // Try: lat/lng (data.json format)  
+        // Or:  latitude/longitude (seed.js format)
+        // Parse as Float to ensure valid numbers
+        let latitude = null;
+        if (item.lat !== undefined && item.lat !== null) {
+          latitude = parseFloat(item.lat);
+        } else if (item.latitude !== undefined && item.latitude !== null) {
+          latitude = parseFloat(item.latitude);
         }
 
-        // Create place with correct field mapping: JSON -> Prisma schema
+        let longitude = null;
+        if (item.lng !== undefined && item.lng !== null) {
+          longitude = parseFloat(item.lng);
+        } else if (item.longitude !== undefined && item.longitude !== null) {
+          longitude = parseFloat(item.longitude);
+        }
+
+        // ========== OPENING HOURS MAPPING ==========
+        let openingHours = null;
+        if (item.opening_hours) {
+          if (typeof item.opening_hours === 'string') {
+            openingHours = item.opening_hours;
+          } else if (item.opening_hours.text) {
+            openingHours = item.opening_hours.text;
+          } else if (item.opening_hours.start && item.opening_hours.end) {
+            openingHours = `${item.opening_hours.start} - ${item.opening_hours.end}`;
+          }
+        } else if (item.openingHours) {
+          openingHours = item.openingHours;
+        }
+
+        // ========== DESIGNER TIP / PRICE MAPPING ==========
+        // Map: price_range OR google_map_link -> designerTip
+        const designerTip = item.price_range || item.designerTip || item.google_map_link || null;
+
+        // ========== OTHER FIELDS ==========
+        const rating = parseFloat(item.rating) || 4.5;
+        const phone = item.phone || null;
+        const indoorSuitable = (item.type || '').toLowerCase().includes('indoor') ||
+          (item.type || '').toLowerCase().includes('cafe') ||
+          (item.type || '').toLowerCase().includes('restaurant');
+
+        // Log first 3 items for debugging
+        if (insertedCount < 3) {
+          console.log(`📝 [${insertedCount + 1}] title="${title}", lat=${latitude}, lng=${longitude}, image="${imagePath?.substring(0, 40)}..."`);
+        }
+
+        // Create the place record
         const place = await prisma.place.create({
           data: {
-            title: loc.name || 'Untitled',                    // name -> title
-            titleVi: loc.name_vi || loc.name || 'Untitled',   // name_vi -> titleVi
-            location: loc.address || 'Đà Lạt',                // address -> location
-            locationVi: loc.address || 'Đà Lạt',
-            description: loc.description || '',
-            descriptionVi: loc.description_vi || loc.description || '',  // description_vi -> descriptionVi
-            imagePath: loc.image || 'https://via.placeholder.com/400x300',  // image -> imagePath
-            rating: loc.rating || 4.5,
-            reviewCount: loc.reviews?.length || 0,
-            categoryId: categoryId,
-            openingHours: openingHoursStr,
-            phone: loc.phone || null,
-            latitude: loc.lat || null,                        // lat -> latitude
-            longitude: loc.lng || null,                       // lng -> longitude
-            indoorSuitable: locType === 'indoor' || locType === 'cafe' || locType === 'restaurant',
-            designerTip: loc.google_map_link || null
+            title,
+            titleVi,
+            location,
+            locationVi,
+            description,
+            descriptionVi,
+            imagePath,
+            rating,
+            reviewCount: item.reviews?.length || 0,
+            categoryId: defaultCategory.id,
+            openingHours,
+            phone,
+            latitude,
+            longitude,
+            indoorSuitable,
+            designerTip
           }
         });
         insertedCount++;
 
         // Create reviews if they exist
-        if (loc.reviews && Array.isArray(loc.reviews) && loc.reviews.length > 0) {
-          for (const review of loc.reviews) {
+        if (item.reviews && Array.isArray(item.reviews)) {
+          for (const review of item.reviews) {
             try {
               await prisma.review.create({
                 data: {
                   title: review.title || null,
-                  content: review.text || review.content || 'Great place!',
+                  content: review.text || review.content || 'Great experience!',
                   rating: review.rating || 5,
                   language: 'en',
                   helpful: 0,
@@ -196,29 +224,32 @@ app.get('/force-seed', async (req, res) => {
               });
               reviewCount++;
             } catch (reviewErr) {
-              console.warn(`⚠️ Failed to create review for ${loc.name}:`, reviewErr.message);
+              console.warn(`⚠️ Review error: ${reviewErr.message}`);
             }
           }
         }
 
       } catch (itemErr) {
-        console.error(`❌ Failed to insert "${loc.name || 'unknown'}":`, itemErr.message);
-        errors.push({ name: loc.name, error: itemErr.message });
+        console.error(`❌ Failed item ${item.id}: ${itemErr.message}`);
+        errors.push({ id: item.id, error: itemErr.message });
       }
     }
 
     console.log(`✓ Inserted ${insertedCount} places`);
     console.log(`✓ Inserted ${reviewCount} reviews`);
-    if (errors.length > 0) {
-      console.log(`⚠️ ${errors.length} items failed`);
-    }
     console.log('🎉 Force seed completed!');
 
     res.json({
       success: true,
       message: 'Database seeded successfully!',
+      debug: {
+        firstItemKeys: Object.keys(firstItem),
+        hasName: !!firstItem.name,
+        hasTitle: !!firstItem.title,
+        hasLat: !!firstItem.lat,
+        hasLatitude: !!firstItem.latitude
+      },
       stats: {
-        categories: createdCategories.length,
         places: insertedCount,
         reviews: reviewCount,
         errors: errors.length
@@ -230,7 +261,8 @@ app.get('/force-seed', async (req, res) => {
     console.error('❌ Force seed failed:', error);
     res.status(500).json({
       error: 'Seed failed',
-      message: error.message
+      message: error.message,
+      stack: error.stack
     });
   }
 });
