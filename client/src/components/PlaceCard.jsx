@@ -7,6 +7,10 @@ const PlaceCard = ({ place }) => {
     const { i18n } = useTranslation();
     const [isLiked, setIsLiked] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
+
+    // Safety check - prevent crash if place is null/undefined
+    if (!place) return null;
+
     const lang = i18n.language;
 
     // Get localized field based on current language
