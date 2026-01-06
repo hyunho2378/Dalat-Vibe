@@ -63,10 +63,10 @@ app.get('/force-seed', async (req, res) => {
   try {
     console.log('🌱 Starting force seed...');
 
-    // Read data.json
-    const dataPath = path.resolve(__dirname, '../data.json');
+    // Read data.json reliably
+    const dataPath = path.join(__dirname, '../data.json');
     if (!fs.existsSync(dataPath)) {
-      return res.status(404).json({ error: 'data.json not found' });
+      return res.status(404).json({ error: 'data.json not found at: ' + dataPath });
     }
 
     const jsonData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
@@ -76,6 +76,8 @@ app.get('/force-seed', async (req, res) => {
       return res.status(400).json({ error: 'No locations found in data.json' });
     }
 
+    console.log(`📦 Found ${locations.length} locations in data.json`);
+
     // Clear existing data (in correct order due to foreign keys)
     await prisma.favorite.deleteMany();
     await prisma.review.deleteMany();
@@ -83,6 +85,17 @@ app.get('/force-seed', async (req, res) => {
     await prisma.category.deleteMany();
     await prisma.user.deleteMany();
     console.log('✓ Cleared existing data');
+
+    // Create demo user for reviews
+    const demoUser = await prisma.user.create({
+      data: {
+        email: 'demo@dalat.vibe',
+        username: 'Traveler',
+        passwordHash: 'demo_password_hash',
+        avatar: null
+      }
+    });
+    console.log('✓ Created demo user');
 
     // Create categories from unique types in data.json
     const typeMap = {
@@ -93,65 +106,124 @@ app.get('/force-seed', async (req, res) => {
       'restaurant': { name: 'Restaurant', nameVi: 'Nhà hàng' },
       'viewpoint': { name: 'Scenic', nameVi: 'Phong cảnh' },
       'garden': { name: 'Garden', nameVi: 'Vườn hoa' },
-      'adventure': { name: 'Adventure', nameVi: 'Phiêu lưu' }
+      'adventure': { name: 'Adventure', nameVi: 'Phiêu lưu' },
+      'Indoor': { name: 'Indoor', nameVi: 'Trong nhà' }
     };
 
     // Create all categories
+    const createdCategories = [];
     for (const [type, catData] of Object.entries(typeMap)) {
-      await prisma.category.create({ data: catData });
+      // Check if category already exists
+      const existing = createdCategories.find(c => c.name === catData.name);
+      if (!existing) {
+        const cat = await prisma.category.create({ data: catData });
+        createdCategories.push(cat);
+      }
     }
-    console.log('✓ Created categories');
+    console.log(`✓ Created ${createdCategories.length} categories`);
 
-    // Get category IDs
-    const categories = await prisma.category.findMany();
+    // Build category ID map
     const categoryIdMap = {};
-    categories.forEach(cat => {
-      // Map category name to ID
+    for (const cat of createdCategories) {
       for (const [type, catData] of Object.entries(typeMap)) {
         if (catData.name === cat.name) {
           categoryIdMap[type] = cat.id;
         }
       }
-    });
+    }
 
-    // Insert places
+    // Insert places with proper field mapping
     let insertedCount = 0;
-    for (const loc of locations) {
-      const categoryId = categoryIdMap[loc.type] || categoryIdMap['outdoor'];
+    let reviewCount = 0;
+    const errors = [];
 
-      await prisma.place.create({
-        data: {
-          title: loc.name,
-          titleVi: loc.name_vi,
-          location: loc.address || 'Đà Lạt',
-          locationVi: loc.address || 'Đà Lạt',
-          description: loc.description,
-          descriptionVi: loc.description,
-          imagePath: loc.image || 'https://via.placeholder.com/400x300',
-          rating: 4.5,
-          reviewCount: 0,
-          categoryId: categoryId,
-          openingHours: loc.opening_hours ? `${loc.opening_hours.start} - ${loc.opening_hours.end}` : null,
-          phone: loc.phone || null,
-          latitude: loc.lat || null,
-          longitude: loc.lng || null,
-          indoorSuitable: loc.type === 'indoor' || loc.type === 'cafe' || loc.type === 'restaurant',
-          designerTip: loc.price_range ? `Price: ${loc.price_range}` : null
+    for (const loc of locations) {
+      try {
+        // Get category ID (default to 'outdoor' if type not found)
+        const locType = (loc.type || 'outdoor').toLowerCase();
+        const categoryId = categoryIdMap[locType] || categoryIdMap['outdoor'] || createdCategories[0]?.id;
+
+        // Parse opening_hours - handle both object and string formats
+        let openingHoursStr = null;
+        if (loc.opening_hours) {
+          if (typeof loc.opening_hours === 'string') {
+            openingHoursStr = loc.opening_hours;
+          } else if (loc.opening_hours.text) {
+            openingHoursStr = loc.opening_hours.text;
+          } else if (loc.opening_hours.start && loc.opening_hours.end) {
+            openingHoursStr = `${loc.opening_hours.start} - ${loc.opening_hours.end}`;
+          }
         }
-      });
-      insertedCount++;
+
+        // Create place with correct field mapping: JSON -> Prisma schema
+        const place = await prisma.place.create({
+          data: {
+            title: loc.name || 'Untitled',                    // name -> title
+            titleVi: loc.name_vi || loc.name || 'Untitled',   // name_vi -> titleVi
+            location: loc.address || 'Đà Lạt',                // address -> location
+            locationVi: loc.address || 'Đà Lạt',
+            description: loc.description || '',
+            descriptionVi: loc.description_vi || loc.description || '',  // description_vi -> descriptionVi
+            imagePath: loc.image || 'https://via.placeholder.com/400x300',  // image -> imagePath
+            rating: loc.rating || 4.5,
+            reviewCount: loc.reviews?.length || 0,
+            categoryId: categoryId,
+            openingHours: openingHoursStr,
+            phone: loc.phone || null,
+            latitude: loc.lat || null,                        // lat -> latitude
+            longitude: loc.lng || null,                       // lng -> longitude
+            indoorSuitable: locType === 'indoor' || locType === 'cafe' || locType === 'restaurant',
+            designerTip: loc.google_map_link || null
+          }
+        });
+        insertedCount++;
+
+        // Create reviews if they exist
+        if (loc.reviews && Array.isArray(loc.reviews) && loc.reviews.length > 0) {
+          for (const review of loc.reviews) {
+            try {
+              await prisma.review.create({
+                data: {
+                  title: review.title || null,
+                  content: review.text || review.content || 'Great place!',
+                  rating: review.rating || 5,
+                  language: 'en',
+                  helpful: 0,
+                  tags: '[]',
+                  userId: demoUser.id,
+                  placeId: place.id
+                }
+              });
+              reviewCount++;
+            } catch (reviewErr) {
+              console.warn(`⚠️ Failed to create review for ${loc.name}:`, reviewErr.message);
+            }
+          }
+        }
+
+      } catch (itemErr) {
+        console.error(`❌ Failed to insert "${loc.name || 'unknown'}":`, itemErr.message);
+        errors.push({ name: loc.name, error: itemErr.message });
+      }
     }
 
     console.log(`✓ Inserted ${insertedCount} places`);
+    console.log(`✓ Inserted ${reviewCount} reviews`);
+    if (errors.length > 0) {
+      console.log(`⚠️ ${errors.length} items failed`);
+    }
     console.log('🎉 Force seed completed!');
 
     res.json({
       success: true,
       message: 'Database seeded successfully!',
       stats: {
-        categories: Object.keys(typeMap).length,
-        places: insertedCount
-      }
+        categories: createdCategories.length,
+        places: insertedCount,
+        reviews: reviewCount,
+        errors: errors.length
+      },
+      errors: errors.length > 0 ? errors : undefined
     });
 
   } catch (error) {
