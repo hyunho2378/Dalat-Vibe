@@ -135,29 +135,54 @@ app.get('/force-seed', async (req, res) => {
         // ========== DESIGNER TIP (from price_range) ==========
         const designerTip = item.price_range || item.designerTip || null;
 
-        // ========== CATEGORY MAPPING (Critical for LocalEats) ==========
-        const itemType = (item.type || '').toLowerCase();
+        // ========== CATEGORY MAPPING (Critical for LocalEats/Home) ==========
+        const itemType = (item.type || '').trim();
+        const itemTypeLower = itemType.toLowerCase();
         let categoryId = categoryMap['general']; // default
+        let assignedCategory = 'General';
 
-        // Map type to category
-        if (itemType.includes('restaurant') || itemType.includes('dining') || itemType.includes('local')) {
+        // DIRECT MATCH first (for exact types like "Restaurant", "Street Food", "Café")
+        if (itemType === 'Restaurant') {
           categoryId = categoryMap['restaurant'];
-        } else if (itemType.includes('street') || itemType.includes('food')) {
+          assignedCategory = 'Restaurant';
+        } else if (itemType === 'Street Food') {
           categoryId = categoryMap['street food'];
-        } else if (itemType.includes('café') || itemType.includes('cafe') || itemType.includes('coffee')) {
+          assignedCategory = 'Street Food';
+        } else if (itemType === 'Café' || itemType === 'Cafe') {
           categoryId = categoryMap['café'];
-        } else if (itemType.includes('nature') || itemType.includes('scenic')) {
+          assignedCategory = 'Café';
+        } else if (itemType === 'Nature' || itemType === 'Scenic') {
           categoryId = categoryMap['nature'];
-        } else if (itemType.includes('lake')) {
-          categoryId = categoryMap['lake'];
-        } else if (itemType.includes('waterfall')) {
+          assignedCategory = 'Nature';
+        } else if (itemType === 'Waterfall') {
           categoryId = categoryMap['waterfall'];
-        } else if (itemType.includes('indoor')) {
-          categoryId = categoryMap['indoor'];
-        } else if (itemType.includes('outdoor') || itemType.includes('park')) {
-          categoryId = categoryMap['outdoor'];
-        } else if (itemType.includes('adventure')) {
+          assignedCategory = 'Waterfall';
+        } else if (itemType === 'Lake') {
+          categoryId = categoryMap['lake'];
+          assignedCategory = 'Lake';
+        } else if (itemType === 'Adventure') {
           categoryId = categoryMap['adventure'];
+          assignedCategory = 'Adventure';
+        } else if (itemType === 'Park' || itemType === 'Garden') {
+          categoryId = categoryMap['park'];
+          assignedCategory = 'Park';
+        }
+        // FALLBACK: includes-based matching for partial matches
+        else if (itemTypeLower.includes('restaurant') || itemTypeLower.includes('dining') || itemTypeLower.includes('local')) {
+          categoryId = categoryMap['restaurant'];
+          assignedCategory = 'Restaurant';
+        } else if (itemTypeLower.includes('street') || itemTypeLower.includes('food')) {
+          categoryId = categoryMap['street food'];
+          assignedCategory = 'Street Food';
+        } else if (itemTypeLower.includes('café') || itemTypeLower.includes('cafe') || itemTypeLower.includes('coffee')) {
+          categoryId = categoryMap['café'];
+          assignedCategory = 'Café';
+        } else if (itemTypeLower.includes('indoor') || itemTypeLower.includes('architecture') || itemTypeLower.includes('temple') || itemTypeLower.includes('historic')) {
+          categoryId = categoryMap['indoor'];
+          assignedCategory = 'Indoor';
+        } else if (itemTypeLower.includes('outdoor')) {
+          categoryId = categoryMap['outdoor'];
+          assignedCategory = 'Outdoor';
         }
 
         // ========== OPENING HOURS ==========
@@ -176,9 +201,9 @@ app.get('/force-seed', async (req, res) => {
         const rating = parseFloat(item.rating) || 4.5;
         const indoorSuitable = itemType.includes('indoor') || itemType.includes('café') || itemType.includes('restaurant');
 
-        // Log first 3 for debugging
-        if (successCount < 3) {
-          console.log(`📝 [${successCount + 1}] "${title}" | type="${item.type}" | lat=${latitude}, lng=${longitude}`);
+        // Log first 5 for debugging
+        if (successCount < 5) {
+          console.log(`📝 [${successCount + 1}] "${title}" | type="${item.type}" → category="${assignedCategory}"`);
         }
 
         // Create place
