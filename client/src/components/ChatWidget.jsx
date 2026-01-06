@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { Sparkles, X, Send, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+// API Base URL for backend requests
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
+
 // =============================================================================
 // COMPONENT: ChatWidget - Global Floating Chatbot with Gemini AI
 // =============================================================================
@@ -59,7 +62,7 @@ const ChatWidget = () => {
 
         try {
             // Call the backend chat API with current language
-            const response = await fetch('/api/chat', {
+            const response = await fetch(`${API_BASE}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

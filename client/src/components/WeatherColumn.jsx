@@ -12,6 +12,9 @@ import {
     Wind
 } from 'lucide-react';
 
+// API Base URL for backend requests
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
+
 const capitalizeWords = (str) => {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
 };
@@ -47,7 +50,7 @@ const WeatherColumn = () => {
         const fetchWeather = async () => {
             try {
                 // Fetch through backend proxy to protect API key
-                const response = await fetch('/api/weather');
+                const response = await fetch(`${API_BASE}/weather`);
                 if (!response.ok) throw new Error('Weather data unavailable');
                 const data = await response.json();
                 setWeather({

@@ -493,7 +493,7 @@ const Weather = () => {
         const fetchWeatherData = async () => {
             try {
                 // Fetch current weather via backend proxy
-                const currentResponse = await fetch('/api/weather');
+                const currentResponse = await fetch(`${API_BASE}/weather`);
                 if (!currentResponse.ok) throw new Error('Weather data unavailable');
                 const currentData = await currentResponse.json();
 
@@ -507,7 +507,7 @@ const Weather = () => {
                 });
 
                 // Fetch 5-day/3-hour forecast via backend proxy
-                const forecastResponse = await fetch('/api/weather/forecast-detailed');
+                const forecastResponse = await fetch(`${API_BASE}/weather/forecast-detailed`);
                 if (!forecastResponse.ok) throw new Error('Forecast unavailable');
                 const forecastData = await forecastResponse.json();
 

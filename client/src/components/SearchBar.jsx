@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Search, X, MapPin, Utensils, Coffee, Building2, TreePine } from 'lucide-react';
 
+// API Base URL for backend requests
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
+
 // =============================================================================
 // Smart Search Bar Component
 // Glassmorphism design with animated expand/collapse and real-time search
@@ -24,7 +27,7 @@ const SearchBar = ({ scrolled }) => {
     useEffect(() => {
         const fetchPlaces = async () => {
             try {
-                const response = await fetch('/api/places');
+                const response = await fetch(`${API_BASE}/places`);
                 if (response.ok) {
                     const data = await response.json();
                     setAllPlaces(data);

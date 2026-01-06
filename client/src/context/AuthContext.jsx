@@ -1,5 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
+// API Base URL for backend requests
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
+
 // =============================================================================
 // Auth Context
 // =============================================================================
@@ -33,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
     // Register function - creates new account
     const register = async (email, username, password) => {
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch(`${API_BASE}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, username, password })
@@ -54,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
     // Login function - validates credentials
     const login = async (email, password) => {
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch(`${API_BASE}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })

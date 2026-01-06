@@ -6,6 +6,9 @@ import PlaceCard from '../components/PlaceCard';
 import WeatherColumn from '../components/WeatherColumn';
 import HeroSearchBar from '../components/HeroSearchBar';
 
+// API Base URL for backend requests
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
+
 // =============================================================================
 // COMPONENT: HeroSection (Cinematic Split-Layout: Text Left, Weather Right)
 // =============================================================================
@@ -163,7 +166,7 @@ const LocalEatsSection = () => {
         const fetchLocalEats = async () => {
             try {
                 // Fetch all places and filter for food-related categories
-                const response = await fetch('/api/places');
+                const response = await fetch(`${API_BASE}/places`);
                 if (response.ok) {
                     const data = await response.json();
                     // Filter for Street Food and Restaurant categories, limit to 6
@@ -312,7 +315,7 @@ const Home = () => {
     useEffect(() => {
         const fetchRecommendedPlaces = async () => {
             try {
-                const response = await fetch('/api/places');
+                const response = await fetch(`${API_BASE}/places`);
                 if (response.ok) {
                     const data = await response.json();
                     // Transform data to match PlaceCard expected format and take first 6
