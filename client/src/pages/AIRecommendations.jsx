@@ -58,8 +58,12 @@ const getWeatherIcon = (condition) => {
 // =============================================================================
 
 const PlaceCard = ({ place, isVietnamese }) => {
-    const name = isVietnamese && place.titleVi ? place.titleVi : place.title;
-    const description = isVietnamese && place.descriptionVi ? place.descriptionVi : place.description;
+    // ZERO CRASH GUARD
+    if (!place) return null;
+
+    // BULLETPROOF FALLBACK: Vi -> EN -> default
+    const name = (isVietnamese ? place.titleVi : null) || place.title || 'Untitled';
+    const description = (isVietnamese ? place.descriptionVi : null) || place.description || '';
     const { t } = useTranslation();
 
     // Calculate a "match" percentage based on rating (for display purposes)

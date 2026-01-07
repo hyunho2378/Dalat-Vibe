@@ -8,13 +8,15 @@ const PlaceCard = ({ place }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
 
-    // Safety check - prevent crash if place is null/undefined
+    // ZERO CRASH GUARD - prevent render if place is null/undefined
     if (!place) return null;
 
-    // SIMPLIFIED: Only VI has translated place names, all others use English
+    // BULLETPROOF FALLBACK: titleVi -> title -> 'Untitled'
+    // This ensures we NEVER render null/undefined text
     const isVietnamese = i18n.language === 'vi';
-    const title = (isVietnamese && place.titleVi) ? place.titleVi : place.title;
-    const location = (isVietnamese && place.locationVi) ? place.locationVi : place.location;
+    const title = (isVietnamese ? place.titleVi : null) || place.title || 'Untitled';
+    const location = (isVietnamese ? place.locationVi : null) || place.location || 'Dalat';
+    const category = place.category?.name || place.category || '';
 
     return (
         <Link
@@ -54,15 +56,17 @@ const PlaceCard = ({ place }) => {
                 " />
 
                 {/* Category Tag */}
-                <div className="
-                    absolute top-4 left-4 
-                    px-3 py-1.5 rounded-full
-                    bg-white/80 backdrop-blur-sm
-                    text-xs font-manrope font-medium text-foreground/80
-                    z-10
-                ">
-                    {place.category?.name || place.category}
-                </div>
+                {category && (
+                    <div className="
+                        absolute top-4 left-4 
+                        px-3 py-1.5 rounded-full
+                        bg-white/80 backdrop-blur-sm
+                        text-xs font-manrope font-medium text-foreground/80
+                        z-10
+                    ">
+                        {category}
+                    </div>
+                )}
 
                 {/* Like Button */}
                 <button

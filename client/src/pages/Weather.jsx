@@ -419,8 +419,12 @@ const DayForecastCard = ({ day, isExpanded, onToggle, hourlyData }) => {
 // =============================================================================
 
 const RecommendationCard = ({ place, isVietnamese }) => {
-    const title = isVietnamese && place.titleVi ? place.titleVi : place.title;
-    const location = isVietnamese && place.locationVi ? place.locationVi : place.location;
+    // ZERO CRASH GUARD
+    if (!place) return null;
+
+    // BULLETPROOF FALLBACK: Vi -> EN -> default
+    const title = (isVietnamese ? place.titleVi : null) || place.title || 'Untitled';
+    const location = (isVietnamese ? place.locationVi : null) || place.location || 'Dalat';
     const categoryName = place.category?.name || 'Attraction';
 
     return (

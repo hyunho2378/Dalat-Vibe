@@ -118,10 +118,13 @@ const DetailPage = () => {
         );
     }
 
-    // Get localized content (VI uses translated fields, all others use English)
-    const title = (isVietnamese && place.titleVi) ? place.titleVi : place.title;
-    const description = (isVietnamese && place.descriptionVi) ? place.descriptionVi : place.description;
-    const location = (isVietnamese && place.locationVi) ? place.locationVi : place.location;
+    // BULLETPROOF FALLBACK: titleVi -> title -> 'Untitled'
+    // Ensures we NEVER render null/undefined text
+    const title = (isVietnamese ? place.titleVi : null) || place.title || 'Untitled';
+    const description = (isVietnamese ? place.descriptionVi : null) || place.description || '';
+    const location = (isVietnamese ? place.locationVi : null) || place.location || 'Dalat';
+    const designerTip = place.designerTip || '';
+    const category = place.category?.name || place.category || '';
 
     return (
         <div className="min-h-screen bg-background pb-24">

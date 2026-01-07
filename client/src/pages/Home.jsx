@@ -235,8 +235,8 @@ const LocalEatsSection = () => {
                             className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block"
                         >
                             <img
-                                src={item.imagePath}
-                                alt={isVietnamese && item.titleVi ? item.titleVi : item.title}
+                                src={item.imagePath || ''}
+                                alt={(isVietnamese ? item.titleVi : null) || item.title || 'Local Food'}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                             {/* Gradient Overlay */}
@@ -244,10 +244,10 @@ const LocalEatsSection = () => {
                             {/* Content */}
                             <div className="absolute bottom-0 left-0 right-0 p-4">
                                 <h3 className="font-tenor text-lg text-white mb-1">
-                                    {isVietnamese && item.titleVi ? item.titleVi : item.title}
+                                    {(isVietnamese ? item.titleVi : null) || item.title || 'Untitled'}
                                 </h3>
                                 <p className="font-manrope text-sm text-white/70">
-                                    {(isVietnamese && item.descriptionVi ? item.descriptionVi : item.description)?.substring(0, 60)}...
+                                    {((isVietnamese ? item.descriptionVi : null) || item.description || '').substring(0, 60)}...
                                 </p>
                             </div>
                         </Link>

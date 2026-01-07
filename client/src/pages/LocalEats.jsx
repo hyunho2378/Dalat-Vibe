@@ -42,9 +42,11 @@ const stagger = {
 // =============================================================================
 
 const RestaurantCard = ({ restaurant, isVietnamese }) => {
-    const name = isVietnamese && restaurant.titleVi ? restaurant.titleVi : restaurant.title;
-    const description = isVietnamese && restaurant.descriptionVi ? restaurant.descriptionVi : restaurant.description;
-    const location = isVietnamese && restaurant.locationVi ? restaurant.locationVi : restaurant.location;
+    // BULLETPROOF FALLBACK: Vi -> EN -> default
+    if (!restaurant) return null;
+    const name = (isVietnamese ? restaurant.titleVi : null) || restaurant.title || 'Untitled';
+    const description = (isVietnamese ? restaurant.descriptionVi : null) || restaurant.description || '';
+    const location = (isVietnamese ? restaurant.locationVi : null) || restaurant.location || 'Dalat';
 
     return (
         <Link to={`/place/${restaurant.id}`}>
