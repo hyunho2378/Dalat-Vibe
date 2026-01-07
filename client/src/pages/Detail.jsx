@@ -157,13 +157,14 @@ const DetailPage = () => {
                 <button
                     onClick={() => navigate(-1)}
                     className="
-                        absolute top-16 left-5 z-10
+                        absolute top-16 left-5 z-50
                         p-3 rounded-full
                         bg-white/30 backdrop-blur-md
                         hover:bg-white/50 active:scale-95
                         transition-all duration-200
                         shadow-lg
                         md:top-5
+                        cursor-pointer
                     "
                     aria-label="Go back to previous page"
                 >

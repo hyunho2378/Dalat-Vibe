@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const exploreLinks = [
-        { label: "Weather Curation", href: "/weather" },
-        { label: "Hidden Spots", href: "/ai-recs" },
-        { label: "Local Food", href: "/local-eats" },
-        { label: "Accommodations", href: "/community" },
+        { label: "Weather", href: "/weather" },
+        { label: "Dalat", href: "/city-intro" },
+        { label: "Curation", href: "/ai-recs" },
+        { label: "Dining", href: "/local-eats" },
+        { label: "Community", href: "/community" },
     ];
 
     const officialResources = [
