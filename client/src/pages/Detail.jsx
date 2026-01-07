@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
     ArrowLeft,
@@ -25,6 +25,7 @@ const API_BASE = 'https://dalat-vibe.onrender.com/api';
 
 const DetailPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const [place, setPlace] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -153,8 +154,8 @@ const DetailPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
                 {/* Glassmorphism Back Button - Safe position below status bar */}
-                <Link
-                    to="/"
+                <button
+                    onClick={() => navigate(-1)}
                     className="
                         absolute top-16 left-5 z-10
                         p-3 rounded-full
@@ -164,10 +165,10 @@ const DetailPage = () => {
                         shadow-lg
                         md:top-5
                     "
-                    aria-label="Go back to home"
+                    aria-label="Go back to previous page"
                 >
                     <ArrowLeft className="w-5 h-5 text-white" strokeWidth={2} />
-                </Link>
+                </button>
 
                 {/* Title & Meta - Inside Hero Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-12">
