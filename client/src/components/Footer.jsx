@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     const exploreLinks = [
         { label: "Weather", href: "/weather" },
-        { label: "Dalat", href: "/city-intro" },
+        { label: "Dalat", href: "/intro" },
         { label: "Curation", href: "/ai-recs" },
         { label: "Dining", href: "/local-eats" },
         { label: "Community", href: "/community" },
