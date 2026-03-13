@@ -24,6 +24,7 @@ export const reviewsPart1 = [
         date: "2024-12-10",
         language: "en",
         content: "Beautiful city with amazing French colonial architecture. The weather was perfect - around 18°C during my visit. Only downside was the traffic on weekends can get quite chaotic. Recommend visiting on weekdays if possible.",
+        contentKo: "놀라운 프랑스 식민지풍 건축물이 있는 아름다운 도시입니다. 방문 당시 날씨는 18°C 정도로 완벽했습니다. 유일한 단점은 주말 교통이 꽤 혼잡할 수 있다는 것입니다. 가급적 평일에 방문하는 것을 추천합니다.",
         helpful: 28,
         tags: ["weather", "traffic", "architecture"]
     },
@@ -48,6 +49,7 @@ export const reviewsPart1 = [
         date: "2024-12-05",
         language: "ja",
         content: "ダラットは本当に素晴らしい場所でした。涼しい気候と美しい景色に癒されました。地元の人々はとても親切で、英語が通じなくても笑顔で対応してくれました。",
+        contentKo: "달랏은 정말 훌륭한 장소였습니다. 시원한 기후와 아름다운 경치에 힐링이 되었습니다. 현지 분들도 매우 친절하고, 영어가 통하지 않아도 웃는 얼굴로 대응해 주었습니다.",
         helpful: 33,
         tags: ["weather", "kindness", "scenery"]
     },
@@ -60,6 +62,7 @@ export const reviewsPart1 = [
         date: "2024-12-03",
         language: "vi",
         content: "Đà Lạt mùa này đẹp lắm, thời tiết mát mẻ dễ chịu. Tuy nhiên giá cả hơi đắt so với trước, đặc biệt là vào cuối tuần. Nên đi vào ngày thường để tránh đông đúc.",
+        contentKo: "이번 계절의 달랏은 정말 아름답고, 날씨도 시원하고 쾌적합니다. 하지만 예전에 비해 물가가 조금 비싼 편이고, 특히 주말엔 더욱 그렇습니다. 혼잡을 피하려면 평일에 가는 것이 좋습니다.",
         helpful: 21,
         tags: ["weather", "prices", "crowds"]
     },
@@ -84,6 +87,7 @@ export const reviewsPart1 = [
         date: "2024-11-25",
         language: "en",
         content: "Disappointed with the hygiene standards at some local restaurants. Got food poisoning after eating at a street stall near the market. The scenery is beautiful but be careful where you eat.",
+        contentKo: "일부 현지 식당의 위생 상태에 실망했습니다. 시장 근처 노점에서 식사한 후 식중독에 걸렸어요. 경치는 아름답지만 먹는 것을 조심하세요.",
         helpful: 45,
         tags: ["hygiene", "food", "warning"]
     },
@@ -108,6 +112,7 @@ export const reviewsPart1 = [
         date: "2024-11-20",
         language: "en",
         content: "The flower gardens are absolutely stunning! Spent the whole morning taking photos. Staff were incredibly helpful and even gave us tips on the best spots. Worth every penny of the entrance fee.",
+        contentKo: "꽃 정원이 정말 눈부시게 아름다워요! 오전 내내 사진을 찍으며 보냈습니다. 직원들이 믿을 수 없을 정도로 친절했고 최고의 사진 스팟에 대한 팁도 주었어요. 입장료가 전혀 아깝지 않습니다.",
         helpful: 52,
         tags: ["scenery", "kindness", "value"]
     },
@@ -132,6 +137,7 @@ export const reviewsPart1 = [
         date: "2024-11-15",
         language: "vi",
         content: "Đà Lạt lúc nào cũng đẹp! Thời tiết mát mẻ, con người thân thiện, đồ ăn ngon. Đặc biệt là bánh mì xíu mại ở chợ đêm, ngon tuyệt vời!",
+        contentKo: "달랏은 언제나 아름답습니다! 시원한 날씨, 친절한 사람들, 맛있는 음식. 특히 야시장의 슈마이 반미(bánh mì xíu mại)는 정말 훌륭해요!",
         helpful: 27,
         tags: ["weather", "kindness", "food"]
     },
@@ -156,6 +162,7 @@ export const reviewsPart1 = [
         date: "2024-11-10",
         language: "ja",
         content: "クレイジーハウスはユニークな建築で面白かったです。ただ、週末は観光客が多すぎて写真を撮るのが大変でした。平日に行くことをお勧めします。",
+        contentKo: "크레이지 하우스는 독특한 건축물이라 재미있었습니다. 다만, 주말에는 관광객이 너무 많아서 사진 찍기가 힘들었습니다. 평일에 가는 것을 추천합니다.",
         helpful: 18,
         tags: ["architecture", "crowds", "tips"]
     },
@@ -180,6 +187,7 @@ export const reviewsPart1 = [
         date: "2024-11-05",
         language: "en",
         content: "The Valley of Love is okay but feels a bit touristy and overpriced. The paddle boats are fun, but expect long queues on weekends. Nice for a quick visit but wouldn't spend more than an hour here.",
+        contentKo: "사랑의 계곡은 괜찮지만 다소 관광지 느낌이 강하고 가격이 비싼 편입니다. 오리배는 재미있지만 주말에는 긴 줄을 예상해야 합니다. 잠깐 들르기엔 좋지만 1시간 이상 머물 곳은 아닙니다.",
         helpful: 14,
         tags: ["prices", "crowds", "activities"]
     },
@@ -191,7 +199,7 @@ export const reviewsPart1 = [
         rating: 5,
         date: "2024-11-03",
         language: "ko",
-        content: "스틸 카페 분위기 진짜 최고예요! 커피도 맛있고, 인테리어가 너무 예뻐서 사진 찍다가 시간 가는 줄 몰랐어요. 강추합니다!",
+        content: "스틸 카페 분위기 진짜 최고예요! 커피도 맛있고, 인테리어가 너무 예뻐해서 사진 찍다가 시간 가는 줄 몰랐어요. 강추합니다!",
         helpful: 48,
         tags: ["food", "photography", "atmosphere"]
     },
@@ -204,6 +212,7 @@ export const reviewsPart1 = [
         date: "2024-10-30",
         language: "vi",
         content: "Hồ Xuân Hương đẹp nhất vào buổi sáng sớm khi sương mù còn phủ trên mặt hồ. Không khí trong lành, rất thích hợp để chạy bộ hoặc đạp xe.",
+        contentKo: "쑤언흐엉 호수는 호수 수면에 안개가 덮여 있는 이른 아침이 가장 아름답습니다. 공기가 맑아서 조깅이나 자전거 타기에 아주 좋습니다.",
         helpful: 22,
         tags: ["scenery", "weather", "activities"]
     },
@@ -228,6 +237,7 @@ export const reviewsPart1 = [
         date: "2024-10-25",
         language: "ja",
         content: "ロープウェイからの景色が素晴らしかったです。霧がかかった松林が幻想的で、まるで絵画のようでした。カメラを忘れずに！",
+        contentKo: "케이블카에서 바라보는 경치가 훌륭했습니다. 안개 낀 소나무 숲이 환상적이고 마치 그림 같았습니다. 카메라 잊지 마세요!",
         helpful: 29,
         tags: ["scenery", "photography"]
     },
@@ -252,6 +262,7 @@ export const reviewsPart1 = [
         date: "2024-10-20",
         language: "en",
         content: "Dalat exceeded all my expectations! The cool mountain air was such a relief from the humidity of Ho Chi Minh City. Locals are warm and welcoming. The artichoke tea is a must-try!",
+        contentKo: "달랏은 제 기대를 훌쩍 뛰어넘었습니다! 시원한 산 공기는 호치민시의 습도에서 벗어나 큰 위안이 되었어요. 현지인들은 따뜻하게 반겨 줍니다. 아티초크 차는 꼭 드셔보세요!",
         helpful: 41,
         tags: ["weather", "kindness", "food"]
     },
@@ -276,6 +287,7 @@ export const reviewsPart1 = [
         date: "2024-10-15",
         language: "vi",
         content: "Ga xe lửa Đà Lạt là một trong những công trình kiến trúc đẹp nhất Việt Nam. Được xây dựng từ thời Pháp, nơi đây mang đậm phong cách Art Deco rất độc đáo.",
+        contentKo: "달랏 기차역은 베트남에서 가장 아름다운 건축물 중 하나입니다. 프랑스 식민지 시대에 지어졌으며, 아르데코 스타일이 매우 독특합니다.",
         helpful: 34,
         tags: ["architecture", "history"]
     },
@@ -300,6 +312,7 @@ export const reviewsPart1 = [
         date: "2024-10-10",
         language: "en",
         content: "Crazy House is unlike anything I've ever seen! The architecture is whimsical and creative. It's like walking through a fairy tale. Great for photography enthusiasts.",
+        contentKo: "크레이지 하우스는 제가 본 어떤 것과도 다릅니다! 건축물이 기발하고 창의적이에요. 동화 속을 걷는 것 같습니다. 사진 애호가들에게 아주 좋습니다.",
         helpful: 39,
         tags: ["architecture", "photography"]
     },
@@ -324,6 +337,7 @@ export const reviewsPart1 = [
         date: "2024-10-05",
         language: "ja",
         content: "ダラットのカフェ文化は素晴らしいです。どのカフェも個性的で、コーヒーの質も高い。特にエッグコーヒーは絶品でした。",
+        contentKo: "달랏의 카페 문화는 훌륭합니다. 어느 카페나 개성이 넘치고 커피의 질도 높습니다. 특히 에그 커피가 일품이었습니다.",
         helpful: 30,
         tags: ["food", "atmosphere"]
     },
@@ -348,6 +362,7 @@ export const reviewsPart1 = [
         date: "2024-09-30",
         language: "en",
         content: "Xuan Huong Lake is beautiful and peaceful. Rented a swan boat with my family and had a great time. The surrounding cafes have great views. Just avoid weekends if you want some quiet.",
+        contentKo: "쑤언흐엉 호수는 아름답고 평화롭습니다. 가족과 함께 백조 보트를 빌렸는데 아주 즐거운 시간을 보냈어요. 주변 카페들의 전망이 좋습니다. 조용히 즐기고 싶다면 주말은 피하세요.",
         helpful: 18,
         tags: ["scenery", "activities", "tips"]
     },
@@ -372,6 +387,7 @@ export const reviewsPart1 = [
         date: "2024-09-25",
         language: "vi",
         content: "Thung lũng Vàng có cảnh đẹp, đặc biệt là hồ Đan Kia. Tuy nhiên, giá vé hơi cao và có nhiều điểm check-in nhân tạo. Thích hợp để chụp ảnh gia đình.",
+        contentKo: "골든 밸리는 경치가 좋고, 특히 단키아 호수가 아름답습니다. 하지만 티켓 가격이 약간 비싸고 인공적인 포토존이 많아요. 가족 사진을 찍기에 적합합니다.",
         helpful: 16,
         tags: ["scenery", "prices", "photography"]
     },
@@ -396,6 +412,7 @@ export const reviewsPart1 = [
         date: "2024-09-20",
         language: "en",
         content: "The Dalat Palace golf course is nice but overpriced for what you get. Greens were not in the best condition during my visit. Service was friendly though.",
+        contentKo: "달랏 팰리스 골프 코스는 좋지만 퀄리티에 비해 너무 비쌉니다. 제가 방문했을 때 그린 상태가 최상은 아니었어요. 그래도 서비스는 친절했습니다.",
         helpful: 11,
         tags: ["activities", "prices", "kindness"]
     },
@@ -420,6 +437,7 @@ export const reviewsPart1 = [
         date: "2024-09-15",
         language: "ja",
         content: "ダラットワインを試飲しました。思ったより美味しくて驚きました。お土産にもおすすめです。工場見学も興味深かったです。",
+        contentKo: "달랏 와인을 시음했습니다. 생각보다 훨씬 맛있어서 놀랐습니다. 기념품으로도 강력 추천합니다. 공장 견학도 무척 흥미로웠습니다.",
         helpful: 24,
         tags: ["food", "activities"]
     },
@@ -444,6 +462,7 @@ export const reviewsPart1 = [
         date: "2024-09-10",
         language: "en",
         content: "This is my third visit to Dalat and it never disappoints. The weather is always perfect, the people are lovely, and there's always something new to discover. My favorite place in Vietnam!",
+        contentKo: "달랏 세 번째 방문인데 절대 실망시키는 법이 없네요. 날씨는 항상 완벽하고 사람들은 사랑스러우며 항상 새로운 발견이 있습니다. 베트남에서 제가 가장 좋아하는 곳이에요!",
         helpful: 53,
         tags: ["weather", "kindness", "overall"]
     },
@@ -468,6 +487,7 @@ export const reviewsPart1 = [
         date: "2024-09-05",
         language: "vi",
         content: "Nhà thờ Domain de Marie (Nhà thờ Mai Anh) rất đẹp và yên bình. Kiến trúc độc đáo màu hồng pastel, rất thích hợp để chụp ảnh cưới.",
+        contentKo: "도마인 드 마리 성당(마이안 성당)은 매우 아름답고 평화롭습니다. 파스텔 핑크 색상의 독특한 건축물로 웨딩 촬영을 하기에 아주 적합합니다.",
         helpful: 28,
         tags: ["architecture", "photography"]
     },
@@ -492,6 +512,7 @@ export const reviewsPart1 = [
         date: "2024-09-01",
         language: "en",
         content: "Best coffee experience ever! Visited several cafes and each one had its own unique charm. The baristas take real pride in their craft. Don't miss the weasel coffee if you're adventurous!",
+        contentKo: "살면서 최고의 커피 경험이었습니다! 여러 카페를 방문했는데 각기 고유한 매력이 있었어요. 바리스타들은 자신의 일에 진정한 자부심을 가지고 있습니다. 모험심이 강하시다면 위즐 커피를 절대 놓치지 마세요!",
         helpful: 36,
         tags: ["food", "atmosphere"]
     },
@@ -516,6 +537,7 @@ export const reviewsPart1 = [
         date: "2024-08-25",
         language: "ja",
         content: "ランビアン山のトレッキングは最高でした！頂上からの眺めは言葉では表現できないほど美しかったです。早朝に出発することをお勧めします。",
+        contentKo: "랑비앙 산 트레킹은 최고였습니다! 정상에서 바라보는 경치는 말로 다 표현할 수 없을 정도로 아름다웠어요. 이른 아침에 출발하시는 것을 강력 추천합니다.",
         helpful: 32,
         tags: ["scenery", "activities", "tips"]
     },
@@ -540,6 +562,7 @@ export const reviewsPart1 = [
         date: "2024-08-20",
         language: "vi",
         content: "Vườn dâu Đà Lạt - tự tay hái dâu rất thú vị! Dâu tươi ngon và ngọt. Giá hơi cao nhưng trải nghiệm rất đáng giá. Nên đến vào buổi sáng để được dâu ngon nhất.",
+        contentKo: "달랏 딸기 농장에서 직접 딸기를 따는 건 아주 재미있습니다! 딸기가 신선하고 무척 달콤해요. 가격은 조금 비싸지만 충분히 가치 있는 경험입니다. 가장 맛있는 딸기를 원하신다면 아침에 방문하세요.",
         helpful: 27,
         tags: ["activities", "food", "tips"]
     },
@@ -564,6 +587,7 @@ export const reviewsPart1 = [
         date: "2024-08-15",
         language: "en",
         content: "Golden Valley is worth a visit for the scenery alone. The lake views are stunning. Just be prepared for some walking. Wear comfortable shoes and bring sunscreen.",
+        contentKo: "골든 밸리는 경치만으로도 방문할 가치가 있습니다. 호수 뷰가 정말 기가 막힙니다. 다만 꽤 걸어야 하니 마음의 준비를 하세요. 편안한 신발을 신고 자외선 차단제를 챙기시는 게 좋습니다.",
         helpful: 16,
         tags: ["scenery", "tips"]
     },
@@ -588,6 +612,7 @@ export const reviewsPart1 = [
         date: "2024-08-10",
         language: "ja",
         content: "ワイナリーツアーに参加しましたが、説明が少し物足りなかったです。ワインの試飲は良かったですが、もう少し詳しい説明があると良いと思います。",
+        contentKo: "와이너리 투어에 참여했는데 설명이 조금 아쉬웠습니다. 와인 시음은 참 좋았지만, 조금 더 자세한 설명이 있었으면 훨씬 좋았을 것 같습니다.",
         helpful: 10,
         tags: ["activities", "food"]
     },
@@ -631,6 +656,7 @@ export const reviewsPart2 = [
         date: "2024-08-03",
         language: "en",
         content: "The strawberry farm experience was fun! Kids loved picking their own berries. A bit touristy but worth it for families. The strawberry smoothies there are incredible.",
+        contentKo: "딸기 농장 체험이 너무 재미있었어요! 아이들이 직접 과일을 따며 엄청 좋아했습니다. 다소 관광지 느낌은 있지만 가족 여행으로는 충분히 가볼 만합니다. 그곳에서 파는 딸기 스무디는 정말 환상적이에요.",
         helpful: 22,
         tags: ["activities", "family", "food"]
     },
@@ -655,6 +681,7 @@ export const reviewsPart2 = [
         date: "2024-07-28",
         language: "vi",
         content: "Vườn hoa thành phố Đà Lạt thật sự tuyệt vời! Hoa nở rộ khắp nơi, không khí trong lành. Nên đi vào buổi sáng sớm để tránh đông và có ánh sáng đẹp nhất để chụp ảnh.",
+        contentKo: "달랏 시티 플라워 가든은 정말 대단합니다! 사방에 꽃이 피어 있고 공기도 무척 맑습니다. 인파를 피하고 가장 예쁜 빛으로 사진을 찍으려면 이른 아침에 방문하는 것을 권장합니다.",
         helpful: 31,
         tags: ["scenery", "photography", "tips"]
     },
@@ -667,6 +694,7 @@ export const reviewsPart2 = [
         date: "2024-07-25",
         language: "ja",
         content: "ダラットのカフェは本当に素晴らしいです。特に「メモワール」というカフェは雰囲気が最高で、コーヒーも絶品でした。何時間でもいられます。",
+        contentKo: "달랏의 카페는 정말 훌륭합니다. 특히 '메모아르'라는 카페는 분위기가 최고였고 커피도 일품이었습니다. 몇 시간이고 계속 머물 수 있을 것 같아요.",
         helpful: 28,
         tags: ["food", "atmosphere"]
     },
@@ -691,6 +719,7 @@ export const reviewsPart2 = [
         date: "2024-07-20",
         language: "en",
         content: "Very disappointed with the motorbike rental service. The bike broke down after an hour and they tried to charge me for 'damages'. Avoid this company at all costs. Use Grab instead.",
+        contentKo: "오토바이 대여 서비스에 크게 실망했습니다. 1시간 만에 오토바이가 고장 났는데 저에게 '파손' 비용을 청구하려 했습니다. 이 업체는 절대 이용하지 마세요. 차라리 그랩을 타는 게 낫습니다.",
         helpful: 54,
         tags: ["traffic", "service", "warning"]
     },
@@ -715,6 +744,7 @@ export const reviewsPart2 = [
         date: "2024-07-15",
         language: "vi",
         content: "Thác Datanla đẹp và mát mẻ. Trò chơi mạo hiểm như đu dây, trượt máng rất thú vị. Tuy nhiên, vào cuối tuần thì đông nghẹt, nên đi ngày thường.",
+        contentKo: "다탄라 폭포는 아름답고 무척 시원합니다. 짚라인이나 알파인 코스터 같은 모험적인 어트랙션이 아주 재미있어요. 다만 주말에는 발 디딜 틈 없이 붐비니 꼭 평일에 가세요.",
         helpful: 21,
         tags: ["scenery", "activities", "crowds"]
     },
@@ -739,6 +769,7 @@ export const reviewsPart2 = [
         date: "2024-07-10",
         language: "en",
         content: "Watching the sunset over Xuan Huong Lake was magical. The colors reflecting on the water were breathtaking. Grabbed a bánh mì from a nearby vendor - perfection!",
+        contentKo: "쑤언흐엉 호수 너머로 저무는 일몰을 바라보는 건 정말 마법 같았습니다. 수면에 반사되는 다채로운 색감은 숨이 멎을 정도로 아름다웠어요. 근처 노점에서 산 반미와 함께하니 그야말로 완벽했습니다!",
         helpful: 27,
         tags: ["scenery", "food"]
     },
@@ -763,6 +794,7 @@ export const reviewsPart2 = [
         date: "2024-07-05",
         language: "ja",
         content: "ダラット駅はレトロな雰囲気が素敵でした。短い距離ですが、実際に列車に乗ることもできます。駅舎内のカフェからの眺めもお勧めです。",
+        contentKo: "달랏 기차역은 레트로한 분위기가 정말 멋졌습니다. 비록 짧은 거리지만 실제로 열차를 타볼 수도 있어요. 역사 내 카페에서 감상하는 경치도 훌륭합니다.",
         helpful: 19,
         tags: ["architecture", "activities", "atmosphere"]
     },
@@ -774,7 +806,7 @@ export const reviewsPart2 = [
         rating: 2,
         date: "2024-07-03",
         language: "ko",
-        content: "사랑의 계곡 완전 바가지예요. 입장료도 비싼데, 안에서 사진 찍으려면 또 돈 내야 해요. 조형물도 촌스럽고... 시간 낭비였어요.",
+        content: "사랑의 계곡 완전 바가지예요. 입장료도 비싼데, 안에서 사진 찍려면 또 돈 내야 해요. 조형물도 촌스럽고... 시간 낭비였어요.",
         helpful: 41,
         tags: ["prices", "commercialized", "warning"]
     },
@@ -787,6 +819,7 @@ export const reviewsPart2 = [
         date: "2024-07-01",
         language: "vi",
         content: "Quán cà phê Mê Linh tuyệt vời! View nhìn ra thung lũng sương mù, cà phê ngon, giá cả hợp lý. Đây là nơi phải ghé khi đến Đà Lạt!",
+        contentKo: "메린 커피 가든은 환상적입니다! 안개 낀 계곡이 내려다보이는 탁 트인 전망, 맛있는 커피, 합리적인 가격까지. 달랏에 오면 무조건 들러야 할 명소입니다!",
         helpful: 45,
         tags: ["food", "scenery", "atmosphere"]
     },
@@ -811,6 +844,7 @@ export const reviewsPart2 = [
         date: "2024-06-25",
         language: "en",
         content: "Dalat is a hidden gem! As someone who has traveled extensively in Southeast Asia, this city stands out for its unique climate and charming atmosphere. The locals are genuinely friendly.",
+        contentKo: "달랏은 숨겨진 보석입니다! 동남아시아 곳곳을 여행해 본 사람으로서, 이 도시는 특유의 기후와 매력적인 분위기로 단연 돋보입니다. 현지인들도 진심으로 친절합니다.",
         helpful: 52,
         tags: ["weather", "kindness", "overall"]
     },
@@ -835,6 +869,7 @@ export const reviewsPart2 = [
         date: "2024-06-20",
         language: "ja",
         content: "いちご農園で摘みたてのいちごを食べました。とても甘くて美味しかったです。お土産用のジャムも買いました。家族連れにおすすめです。",
+        contentKo: "딸기 농장에서 갓 딴 신선한 딸기를 먹어봤는데, 정말 달고 맛있었습니다. 기념품으로 딸기 잼도 구매했어요. 가족 단위 여행객에게 적극 추천합니다.",
         helpful: 23,
         tags: ["activities", "food", "family"]
     },
@@ -859,6 +894,7 @@ export const reviewsPart2 = [
         date: "2024-06-15",
         language: "vi",
         content: "Chợ Đà Lạt đông đúc nhưng rất vui. Có thể mua được nhiều đặc sản như atiso, dâu tây, mứt. Nhớ trả giá vì giá dành cho khách du lịch thường cao hơn.",
+        contentKo: "달랏 시장은 엄청 붐비지만 아주 활기차고 재미있습니다. 아티초크, 딸기, 잼 같은 현지 특산품을 다양하게 살 수 있어요. 관광객에게는 가격을 높게 부르는 경향이 있으니 반드시 흥정을 하세요.",
         helpful: 29,
         tags: ["food", "prices", "tips"]
     },
@@ -883,6 +919,7 @@ export const reviewsPart2 = [
         date: "2024-06-10",
         language: "en",
         content: "Crazy House is definitely worth a visit for architecture lovers. It's like a Gaudí building meets a treehouse. Just be prepared for narrow passages and steep stairs.",
+        contentKo: "건축 애호가라면 크레이지 하우스는 무조건 방문할 가치가 있습니다. 가우디의 건축물과 트리하우스가 절묘하게 만난 느낌이에요. 좁은 통로와 가파른 계단이 있으니 마음의 준비를 하세요.",
         helpful: 26,
         tags: ["architecture", "tips"]
     },
@@ -907,6 +944,7 @@ export const reviewsPart2 = [
         date: "2024-06-05",
         language: "ja",
         content: "ワインの品質は正直いまいちでした。でもワイナリーの雰囲気は良く、ベトナムでワインを作っていること自体は興味深かったです。",
+        contentKo: "솔직히 와인의 품질은 조금 아쉬웠습니다. 그래도 와이너리의 전반적인 분위기가 좋았고, 베트남에서 직접 와인을 양조한다는 사실 자체가 꽤 흥미로웠습니다.",
         helpful: 14,
         tags: ["food", "activities"]
     },
@@ -931,6 +969,7 @@ export const reviewsPart2 = [
         date: "2024-06-01",
         language: "vi",
         content: "Dinh Bảo Đại rất đáng để tham quan. Kiến trúc Pháp đẹp, vườn hoa rộng lớn. Là nơi lý tưởng để tìm hiểu về lịch sử Việt Nam thời phong kiến.",
+        contentKo: "바오다이 황제의 여름 별장은 정말 가볼 만한 곳입니다. 우아한 프랑스풍 건축물과 드넓은 꽃 정원이 아름답습니다. 베트남 봉건 시대의 역사를 깊이 이해하기에 완벽한 장소입니다.",
         helpful: 32,
         tags: ["architecture", "history", "scenery"]
     },
@@ -955,6 +994,7 @@ export const reviewsPart2 = [
         date: "2024-05-25",
         language: "en",
         content: "The hike to Lang Biang peak was challenging but absolutely rewarding. The view from the top is spectacular - you can see the entire valley. Start early to catch the sunrise!",
+        contentKo: "랑비앙 산 정상까지 오르는 길은 제법 힘들었지만 그만한 가치가 200% 있었습니다. 정상에서 내려다보는 계곡 뷰가 그야말로 장관이에요. 일출을 보시려면 꼭 일찍 출발하세요!",
         helpful: 43,
         tags: ["scenery", "activities", "tips"]
     },
@@ -979,6 +1019,7 @@ export const reviewsPart2 = [
         date: "2024-05-20",
         language: "vi",
         content: "Ga xe lửa Đà Lạt là một trong những công trình kiến trúc đẹp nhất Việt Nam. Đường ray đến Trại Mát ngắn nhưng trải nghiệm rất thú vị.",
+        contentKo: "달랏 기차역은 베트남을 통틀어 가장 아름다운 건축물 중 하나로 손꼽힙니다. 짜이맛(Trai Mat)까지 가는 철로 코스는 비록 짧지만 잊지 못할 흥미로운 경험을 선사합니다.",
         helpful: 20,
         tags: ["architecture", "activities"]
     },
@@ -1003,6 +1044,7 @@ export const reviewsPart2 = [
         date: "2024-05-15",
         language: "ja",
         content: "愛の谷は名前ほどロマンチックではありませんでした。人工的な装飾が多く、少しがっかりしました。ただし、ボート乗りは楽しかったです。",
+        contentKo: "사랑의 계곡은 이름만큼 로맨틱한 곳은 아니었습니다. 인공적인 조형물과 장식이 너무 많아서 솔직히 조금 실망했어요. 그래도 오리보트를 타는 건 재미있었습니다.",
         helpful: 16,
         tags: ["scenery", "commercialized", "activities"]
     },
@@ -1027,6 +1069,7 @@ export const reviewsPart2 = [
         date: "2024-05-10",
         language: "en",
         content: "Me Linh Coffee Garden is a must-visit! The view of the misty valley is breathtaking, especially in the morning. Their weasel coffee is expensive but worth trying at least once.",
+        contentKo: "메린 커피 가든은 무조건 가봐야 하는 곳입니다! 특히 아침에 안개 낀 계곡을 내려다보는 전망은 숨이 멎을 정도예요. 위즐 커피는 가격대가 꽤 높지만 살면서 한 번쯤은 맛볼 가치가 충분합니다.",
         helpful: 39,
         tags: ["food", "scenery", "atmosphere"]
     },
@@ -1051,6 +1094,7 @@ export const reviewsPart2 = [
         date: "2024-05-05",
         language: "vi",
         content: "Thuê xe máy ở Đà Lạt rất tiện lợi. Giá cả hợp lý, xe chất lượng tốt. Nhưng nhớ kiểm tra xe kỹ trước khi thuê và chụp ảnh lại tình trạng xe.",
+        contentKo: "달랏에서 오토바이를 렌트하는 건 이동하기에 아주 편리합니다. 가격도 합리적이고 오토바이 상태도 준수해요. 다만 대여하기 전에 오토바이를 꼼꼼히 확인하고 전체 상태를 미리 사진으로 찍어두는 것을 잊지 마세요.",
         helpful: 26,
         tags: ["traffic", "tips", "prices"]
     },
@@ -1075,6 +1119,7 @@ export const reviewsPart2 = [
         date: "2024-05-01",
         language: "en",
         content: "The Dalat Palace is a piece of living history. The afternoon tea experience was lovely, and the gardens are well-maintained. A bit pricey but perfect for a special occasion.",
+        contentKo: "달랏 팰리스는 살아 숨 쉬는 역사 그 자체입니다. 아름답게 꾸며진 정원에서의 애프터눈 티 경험은 정말 사랑스러웠습니다. 비용은 조금 들지만 특별한 기념일을 보내기에 이보다 완벽할 순 없을 거예요.",
         helpful: 21,
         tags: ["architecture", "food", "atmosphere"]
     },
@@ -1099,6 +1144,7 @@ export const reviewsPart2 = [
         date: "2024-04-25",
         language: "ja",
         content: "ダラット市場は活気があって楽しかったです。新鮮な野菜や果物がたくさん。特にアーティチョークティーはお土産におすすめです。",
+        contentKo: "달랏 시장은 활기가 넘치고 볼거리가 많아 아주 즐거웠습니다. 신선한 현지 채소와 과일이 가득해요. 기념품을 고민하신다면 아티초크 차를 강력하게 추천합니다.",
         helpful: 25,
         tags: ["food", "atmosphere"]
     },
@@ -1123,6 +1169,7 @@ export const reviewsPart2 = [
         date: "2024-04-20",
         language: "vi",
         content: "Hồ Xuân Hương là trái tim của Đà Lạt. Đạp vịt trên hồ rất lãng mạn, nhất là lúc hoàng hôn. Xung quanh có nhiều quán cà phê view đẹp.",
+        contentKo: "쑤언흐엉 호수는 달랏의 심장과도 같은 곳입니다. 특히 해가 질 무렵 호수에서 오리배를 타는 건 무척 낭만적인 경험이에요. 호수 주변으로 멋진 뷰를 자랑하는 카페들도 많습니다.",
         helpful: 33,
         tags: ["scenery", "activities", "atmosphere"]
     },
@@ -1147,6 +1194,7 @@ export const reviewsPart2 = [
         date: "2024-04-15",
         language: "en",
         content: "Bao Dai's Summer Palace offers a glimpse into Vietnam's royal history. The architecture is beautiful and the gardens are peaceful. Audio guide is recommended for context.",
+        contentKo: "바오다이 황제의 여름 별장은 베트남 왕실의 역사를 엿볼 수 있게 해주는 귀중한 장소입니다. 건축물이 수려하고 정원은 매우 평화롭습니다. 역사적 배경을 제대로 이해하기 위해 오디오 가이드를 꼭 대여하세요.",
         helpful: 27,
         tags: ["architecture", "history", "tips"]
     },
@@ -1171,6 +1219,7 @@ export const reviewsPart2 = [
         date: "2024-04-10",
         language: "ja",
         content: "ケーブルカーからの眺めは絶景でした。松林と霧が織りなす風景は幻想的です。カメラを忘れずに！頂上のお寺も見どころがあります。",
+        contentKo: "케이블카에서 내려다보는 경치는 그야말로 절경이었습니다. 빼곡한 소나무 숲과 안개가 어우러진 풍경이 무척 환상적입니다. 사진 찍을 카메라를 절대 잊지 마세요! 산 정상에 있는 사원도 꼭 한 번 둘러볼 만합니다.",
         helpful: 29,
         tags: ["scenery", "photography"]
     },
@@ -1195,6 +1244,7 @@ export const reviewsPart2 = [
         date: "2024-04-05",
         language: "vi",
         content: "Đà Lạt mộng mơ như trong truyện cổ tích! Thời tiết mát mẻ quanh năm, con người thân thiện, ẩm thực phong phú. Sẽ quay lại nhiều lần nữa!",
+        contentKo: "달랏은 마치 동화 속 마을처럼 몽환적이고 아름답습니다! 일 년 내내 시원한 날씨, 항상 친절한 사람들, 그리고 풍성하고 맛있는 음식들까지. 앞으로도 수십 번은 더 오게 될 것 같아요!",
         helpful: 47,
         tags: ["weather", "kindness", "food", "overall"]
     },

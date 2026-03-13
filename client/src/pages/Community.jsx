@@ -13,8 +13,7 @@ import {
     MessageCircle,
     Share2,
     Calendar,
-    Languages, // 번역 아이콘
-    Loader2   // 로딩 아이콘
+    Languages
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { reviewsPart1, reviewsPart2 } from '../data/mockReviews';
@@ -28,7 +27,6 @@ import WritePostModal from '../components/WritePostModal';
 
 const ITEMS_PER_PAGE = 12;
 const CUSTOM_REVIEWS_KEY = 'dalat_custom_reviews';
-const API_BASE = 'https://dalat-vibe.onrender.com/api';
 
 const staticReviews = [...reviewsPart1, ...reviewsPart2];
 
@@ -68,54 +66,21 @@ const ReviewCard = ({ review }) => {
     const ratingNum = getRatingNumber(review.rating);
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // 번역 관련 상태
-    const [isTranslating, setIsTranslating] = useState(false);
-    const [translatedText, setTranslatedText] = useState('');
+    // API 딜레이 없이 100% 즉시 토글되는 번역 상태
     const [showTranslation, setShowTranslation] = useState(false);
 
     const isLongContent = review.content.length > 150;
 
-    const handleTranslate = async (e) => {
+    const handleTranslate = (e) => {
         e.stopPropagation();
+        // 한국어 원문이거나 mock 데이터에 contentKo가 없을 경우 토글 방지
+        if (review.language === 'ko' || !review.contentKo) return;
 
-        if (showTranslation) {
-            setShowTranslation(false);
-            return;
-        }
-
-        if (translatedText) {
-            setShowTranslation(true);
-            return;
-        }
-
-        setIsTranslating(true);
-        try {
-            const response = await fetch(`${API_BASE}/reviews/translate`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    text: review.content,
-                    targetLanguage: i18n.language || 'en'
-                })
-            });
-
-            // 🚨 백엔드 연결 실패 시 바로 알아챌 수 있게 에러 처리 추가
-            if (!response.ok) {
-                throw new Error(`서버 응답 오류 (상태 코드: ${response.status})`);
-            }
-
-            const data = await response.json();
-            if (data.translatedText) {
-                setTranslatedText(data.translatedText);
-                setShowTranslation(true);
-            }
-        } catch (error) {
-            console.error('Translation error:', error);
-            alert("번역 서버와 연결할 수 없습니다!\n1. 백엔드(reviews.js) 코드가 정상적으로 Render에 배포되었는지 확인해 주세요.");
-        } finally {
-            setIsTranslating(false);
-        }
+        setShowTranslation(!showTranslation);
     };
+
+    // 화면에 보여줄 텍스트 결정 로직 (번역 상태면 contentKo, 아니면 content)
+    const displayText = showTranslation && review.contentKo ? review.contentKo : review.content;
 
     return (
         <motion.div
@@ -126,7 +91,7 @@ const ReviewCard = ({ review }) => {
             className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors duration-300 flex flex-col h-full"
         >
             <div className="p-5 flex flex-col h-full">
-                {/* Header */}
+                {/* Header: Author & Rating */}
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                         {review.avatar || review.authorAvatar ? (
@@ -177,7 +142,8 @@ const ReviewCard = ({ review }) => {
 
                     <div className="relative">
                         <p className={`font-manrope text-sm text-white/80 leading-relaxed whitespace-pre-wrap ${!isExpanded && isLongContent ? 'line-clamp-3' : ''}`}>
-                            {showTranslation ? translatedText : review.content}
+                            {/* 토글 상태에 따라 즉시 텍스트 변경 */}
+                            {displayText}
                         </p>
                         {isLongContent && (
                             <button
@@ -192,7 +158,7 @@ const ReviewCard = ({ review }) => {
                         )}
                     </div>
 
-                    {/* Tags & Translate Button (아이콘 전용 UI 적용) */}
+                    {/* Tags & Translate Button */}
                     <div className="flex items-center justify-between gap-3 mt-auto pt-4">
                         {review.tags && review.tags.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
@@ -207,26 +173,22 @@ const ReviewCard = ({ review }) => {
                             </div>
                         ) : <div />}
 
-                        {/* 버튼 텍스트 날리고 동그란 뱃지 형태로 변경 */}
-                        <button
-                            onClick={handleTranslate}
-                            disabled={isTranslating}
-                            title={showTranslation ? "원문 보기" : "번역하기"}
-                            className={`
-                                flex items-center justify-center w-8 h-8 flex-shrink-0 rounded-full transition-all duration-300 border
-                                ${showTranslation
-                                    ? 'bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30'
-                                    : 'bg-white/5 text-white/50 border-white/10 hover:bg-white/10 hover:text-white/80'
-                                }
-                                disabled:opacity-50 disabled:cursor-not-allowed
-                            `}
-                        >
-                            {isTranslating ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                            ) : (
+                        {/* 한국어 리뷰가 아닐 때만 번역 아이콘 표시 */}
+                        {review.language !== 'ko' && (
+                            <button
+                                onClick={handleTranslate}
+                                title={showTranslation ? "원문 보기" : "한국어로 번역하기"}
+                                className={`
+                                    flex items-center justify-center w-8 h-8 flex-shrink-0 rounded-full transition-all duration-300 border
+                                    ${showTranslation
+                                        ? 'bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30'
+                                        : 'bg-white/5 text-white/50 border-white/10 hover:bg-white/10 hover:text-white/80'
+                                    }
+                                `}
+                            >
                                 <Languages className="w-4 h-4" />
-                            )}
-                        </button>
+                            </button>
+                        )}
                     </div>
                 </div>
 
