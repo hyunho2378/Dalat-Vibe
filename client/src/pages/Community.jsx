@@ -28,7 +28,7 @@ import WritePostModal from '../components/WritePostModal';
 
 const ITEMS_PER_PAGE = 12;
 const CUSTOM_REVIEWS_KEY = 'dalat_custom_reviews';
-const API_BASE = 'https://dalat-vibe.onrender.com/api'; // 백엔드 주소
+const API_BASE = 'https://dalat-vibe.onrender.com/api';
 
 const staticReviews = [...reviewsPart1, ...reviewsPart2];
 
@@ -68,7 +68,7 @@ const ReviewCard = ({ review }) => {
     const ratingNum = getRatingNumber(review.rating);
     const [isExpanded, setIsExpanded] = useState(false);
 
-    // 번역 관련 상태 추가
+    // 번역 관련 상태
     const [isTranslating, setIsTranslating] = useState(false);
     const [translatedText, setTranslatedText] = useState('');
     const [showTranslation, setShowTranslation] = useState(false);
@@ -99,6 +99,11 @@ const ReviewCard = ({ review }) => {
                 })
             });
 
+            // 🚨 백엔드 연결 실패 시 바로 알아챌 수 있게 에러 처리 추가
+            if (!response.ok) {
+                throw new Error(`서버 응답 오류 (상태 코드: ${response.status})`);
+            }
+
             const data = await response.json();
             if (data.translatedText) {
                 setTranslatedText(data.translatedText);
@@ -106,6 +111,7 @@ const ReviewCard = ({ review }) => {
             }
         } catch (error) {
             console.error('Translation error:', error);
+            alert("번역 서버와 연결할 수 없습니다!\n1. 백엔드(reviews.js) 코드가 정상적으로 Render에 배포되었는지 확인해 주세요.");
         } finally {
             setIsTranslating(false);
         }
@@ -120,7 +126,7 @@ const ReviewCard = ({ review }) => {
             className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-colors duration-300 flex flex-col h-full"
         >
             <div className="p-5 flex flex-col h-full">
-                {/* Header: Author & Rating */}
+                {/* Header */}
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                         {review.avatar || review.authorAvatar ? (
@@ -186,8 +192,8 @@ const ReviewCard = ({ review }) => {
                         )}
                     </div>
 
-                    {/* Tags & Translate Button */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 mt-auto pt-4">
+                    {/* Tags & Translate Button (아이콘 전용 UI 적용) */}
+                    <div className="flex items-center justify-between gap-3 mt-auto pt-4">
                         {review.tags && review.tags.length > 0 ? (
                             <div className="flex flex-wrap gap-2">
                                 {review.tags.slice(0, 3).map((tag) => (
@@ -201,11 +207,13 @@ const ReviewCard = ({ review }) => {
                             </div>
                         ) : <div />}
 
+                        {/* 버튼 텍스트 날리고 동그란 뱃지 형태로 변경 */}
                         <button
                             onClick={handleTranslate}
                             disabled={isTranslating}
+                            title={showTranslation ? "원문 보기" : "번역하기"}
                             className={`
-                                flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
+                                flex items-center justify-center w-8 h-8 flex-shrink-0 rounded-full transition-all duration-300 border
                                 ${showTranslation
                                     ? 'bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30'
                                     : 'bg-white/5 text-white/50 border-white/10 hover:bg-white/10 hover:text-white/80'
@@ -214,15 +222,9 @@ const ReviewCard = ({ review }) => {
                             `}
                         >
                             {isTranslating ? (
-                                <>
-                                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                    <span>Translating...</span>
-                                </>
+                                <Loader2 className="w-4 h-4 animate-spin" />
                             ) : (
-                                <>
-                                    <Languages className="w-3.5 h-3.5" />
-                                    <span>{showTranslation ? 'View Original' : 'Translate'}</span>
-                                </>
+                                <Languages className="w-4 h-4" />
                             )}
                         </button>
                     </div>
