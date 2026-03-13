@@ -1,5 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+// 1. 번역 기능을 위해 제미나이 모듈 추가 임포트
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const router = express.Router();
 
@@ -178,6 +180,44 @@ router.post('/:id/helpful', optionalAuth, async (req, res) => {
     } catch (error) {
         console.error('Mark helpful error:', error);
         res.status(500).json({ error: 'Failed to update' });
+    }
+});
+
+// =============================================================================
+// POST /api/reviews/translate - Translate Review Content (새로 추가된 부분)
+// =============================================================================
+
+router.post('/translate', async (req, res) => {
+    try {
+        const { text, targetLanguage } = req.body;
+
+        if (!text || !targetLanguage) {
+            return res.status(400).json({ error: 'Text and targetLanguage are required' });
+        }
+
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) return res.status(500).json({ error: 'No API Key found' });
+
+        const genAI = new GoogleGenerativeAI(apiKey);
+        // 번역은 가볍고 빠른 처리가 중요하므로 가장 안정적인 1.5-flash 모델 권장
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = `
+        다음 텍스트를 ${targetLanguage} 언어로 정확하고 자연스럽게 번역해 주세요.
+        번역된 결과물 외에 어떠한 인사말, 설명, 마크다운 기호도 덧붙이지 마세요. 오직 번역된 텍스트만 출력하세요.
+
+        번역할 텍스트:
+        ${text}
+        `;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const translatedText = response.text();
+
+        res.json({ translatedText: translatedText.trim() });
+    } catch (error) {
+        console.error('Translation error:', error);
+        res.status(500).json({ error: 'Failed to translate review' });
     }
 });
 
