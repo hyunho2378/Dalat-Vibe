@@ -54,6 +54,11 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Uptime ping target (UptimeRobot) — keeps Render from sleeping
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 // =============================================================================
 // Seeding Function (Reusable for auto-seed and force-seed)
 // =============================================================================
